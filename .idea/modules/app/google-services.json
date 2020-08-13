@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "905973041663",
+    "firebase_url": "https://muztalk-9da8c.firebaseio.com",
+    "project_id": "muztalk-9da8c",
+    "storage_bucket": "muztalk-9da8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905973041663:android:5a9483ea59bbd797bc3fca",
+        "android_client_info": {
+          "package_name": "com.example.muztalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905973041663-vdkv5lml9aqcbe57anjg58onfa8m7v8u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.muztalk",
+            "certificate_hash": "7f3cbe1a9a2a61e6dcb1b8211c19161445db48a6"
+          }
+        },
+        {
+          "client_id": "905973041663-apg3pdsjunn3k3k5v73g67qllt5nh44h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUcNin6NPpCY7pZAii505R5dukrVYLhLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905973041663-apg3pdsjunn3k3k5v73g67qllt5nh44h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
