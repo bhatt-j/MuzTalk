@@ -12,5 +12,51 @@
     <string name="title_jitem_list">Items</string>
     <string name="title_jitem_detail">jItem Detail</string>
     <string name="map_keys" translatable="false">AIzaSyB_qsP8AOP_P0MdlPz-48TDaJYjTP3vbjo</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <string name="app_description">Music connects each other</string>
+    <string name="my_room">My Room</string>
+    <string name="welcome1">Welcome back,</string>
+    <string name="Email">Email</string>
+    <string name="Log_in">Log-in</string>
+    <string name="new_user">new user?</string>
+    <string name="forget_password">forget password?</string>
+    <string name="password">password</string>
+    <string name="your_room1">Your Room</string>
+    <string name="change_password">Change Password</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="log_out">Log-out</string>
+    <string name="options">options</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="settings">Settings</string>
+    <string name="email_id">Email-id</string>
+    <string name="full_name">Full Name</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="todo">TODO</string>
     <!--<string name="map_keys" translatable="false">Enter your google API key here</string>-->
+
+    <string-array name="settings_menu">
+        <item>Personal Details</item>
+        <item>Notifications</item>
+        <item>Theme</item>
+        <item>invite friend</item>
+        <item>Change Password</item>
+        <item>Log-out</item>
+        <item>Delete Account</item>
+    </string-array>
 </resources>

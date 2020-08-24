@@ -1,9 +1,11 @@
 package com.example.muztalk;
 
+import android.net.Uri;
+
 public class users {
     public String UserName;
 
-    public users()
+    public users(Uri imageUri)
     {
 
     }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SigninActivity">
+    tools:context=".SigninActivity"
+    android:background="@drawable/grad_background">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -12,10 +13,10 @@
         android:layout_height="201dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035"
+        app:layout_constraintVertical_bias="0.099"
         app:srcCompat="@drawable/logo" />
 
     <TextView
@@ -28,10 +29,10 @@
         android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintVertical_bias="0.405" />
 
     <EditText
         android:id="@+id/v_emailid"
@@ -39,7 +40,7 @@
         android:layout_height="59dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Email-id"
+        android:hint="@string/email_id"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.363"
@@ -100,6 +101,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.889" />
+
+    <!-- <androidx.cardview.widget.CardView
+         android:layout_width="185dp"
+         android:layout_height="175dp"
+         android:layout_marginTop="5dp"
+         app:cardCornerRadius="500dp"
+         >-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

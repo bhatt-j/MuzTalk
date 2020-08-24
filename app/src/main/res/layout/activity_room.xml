@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RoomActivity">
+    tools:context=".RoomActivity"
+    >
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="414dp"
-        android:layout_height="580dp"
+        android:layout_width="396dp"
+        android:layout_height="555dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.006"
-        app:srcCompat="@drawable/bckground2" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/bckground2"
+        android:contentDescription="@string/todo"/>
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Room"
-        android:textSize="50dp"
+        android:text="@string/your_room1"
+        android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.222" />
 
     <ImageView
         android:id="@+id/a_speakers"
@@ -36,11 +41,12 @@
         android:layout_height="94dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.979"
+        app:layout_constraintHorizontal_bias="0.951"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.273"
-        app:srcCompat="@drawable/speakers" />
+        app:layout_constraintVertical_bias="0.231"
+        app:srcCompat="@drawable/speakers"
+        android:contentDescription="@string/todo"/>
 
     <ImageView
         android:id="@+id/a_globe"
@@ -48,23 +54,25 @@
         android:layout_height="62dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.321"
-        app:srcCompat="@drawable/globe" />
+        app:layout_constraintVertical_bias="0.265"
+        app:srcCompat="@drawable/globe"
+        android:contentDescription="@string/todo"/>
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="68dp"
-        android:layout_height="113dp"
+        android:layout_width="92dp"
+        android:layout_height="114dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView5"
-        app:layout_constraintVertical_bias="0.604"
-        app:srcCompat="@drawable/smartphone" />
+        app:layout_constraintVertical_bias="0.541"
+        app:srcCompat="@drawable/smartphone"
+        android:contentDescription="@string/todo" />
 
     <ImageView
         android:id="@+id/a_youtube"
@@ -74,6 +82,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178"
-        app:srcCompat="@drawable/yt" />
+        app:layout_constraintVertical_bias="0.149"
+        app:srcCompat="@drawable/yt"
+        android:contentDescription="@string/todo" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:background="#E38EC1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.559"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        >
+
+        <ImageView
+            android:id="@+id/a_user_profile"
+            android:layout_width="59dp"
+            android:layout_height="58dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/user_icon"
+            tools:ignore="VectorDrawableCompat"
+            android:contentDescription="@string/todo"/>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="59dp"
+            android:layout_height="58dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/search_icon"
+            tools:ignore="MissingConstraints,VectorDrawableCompat"
+            tools:layout_editor_absoluteY="3dp"
+            android:contentDescription="@string/todo"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

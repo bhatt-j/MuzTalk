@@ -1,8 +1,5 @@
 package com.example.muztalk;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,11 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SigninActivity extends AppCompatActivity {
@@ -24,13 +23,12 @@ public class SigninActivity extends AppCompatActivity {
     Button SIGNUP;
 
     Task<Void> databaseReference;
-    FirebaseDatabase firebaseDatabase;
     FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-
+        getSupportActionBar().hide();
 
         EmAIL=(EditText)findViewById(R.id.v_emailid);
         PASSWORD=(EditText)findViewById(R.id.v_password);
@@ -84,7 +82,7 @@ public class SigninActivity extends AppCompatActivity {
 
                                         myRef.setValue(UserName);*/
 
-                                        databaseReference = firebaseDatabase.getInstance().getReference("users")
+                                        databaseReference = FirebaseDatabase.getInstance().getReference("users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override

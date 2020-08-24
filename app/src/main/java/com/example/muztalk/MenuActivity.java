@@ -1,11 +1,11 @@
 package com.example.muztalk;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -13,19 +13,27 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        final Button a_myroombutton = (Button) findViewById(R.id.a_myroombutton);
-        a_myroombutton.setOnClickListener(new View.OnClickListener() {
+        getSupportActionBar().hide();
+
+        final Button a_myRoom = (Button) findViewById(R.id.a_myRoom);
+        a_myRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { openRoomActivity();
             }
 
 
         });
-
     }
     public void openRoomActivity(){
         Intent intent = new Intent(this,RoomActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+       // overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
     }
 
 }
