@@ -40,7 +40,8 @@
                 android:foregroundGravity="center"
                 android:padding="3dp"
                 app:srcCompat="@drawable/user_icon"
-                tools:ignore="VectorDrawableCompat" />
+                tools:ignore="VectorDrawableCompat"
+                android:contentDescription="@string/todo" />
 
 
         </RelativeLayout>
@@ -54,7 +55,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
             android:fontFamily="sans-serif-light"
-            android:text="Janvi"
+            android:text="@string/username"
             android:textColor="@color/white"
             android:textSize="32sp" />
 
@@ -67,7 +68,10 @@
             android:layout_marginRight="15dp"
             android:adjustViewBounds="true"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_settings" />
+            android:src="@drawable/ic_settings"
+            android:contentDescription="@string/todo"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp" />
 
     </RelativeLayout>
 
@@ -90,7 +94,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -103,7 +108,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     app:srcCompat="@drawable/ic_baseline_email_24"
-                    tools:ignore="VectorDrawableCompat" />
+                    tools:ignore="VectorDrawableCompat"
+                    android:contentDescription="@string/todo" />
 
                 <TextView
                     android:id="@+id/useremail"
@@ -111,10 +117,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="sans-serif-light"
-                    android:text="janvi@gmail.com"
+                    android:text="@string/user_gmail"
                     android:textColor="#000000"
                     android:textSize="18sp"
-                    />
+                    android:layout_marginStart="10dp" />
 
                 <View
                     android:layout_width="match_parent"

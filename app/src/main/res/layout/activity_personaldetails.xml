@@ -29,9 +29,9 @@
 
 
     <EditText
-        android:id="@+id/v_fullname"
-        android:layout_width="367dp"
-        android:layout_height="59dp"
+        android:id="@+id/a_full_name"
+        android:layout_width="360dp"
+        android:layout_height="57dp"
         android:layout_gravity="center"
         android:ems="15"
         android:hint="@string/full_name"
@@ -39,13 +39,14 @@
         android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.225" />
+        app:layout_constraintVertical_bias="0.225"
+        android:autofillHints="Janvi Bhatt" />
 
     <EditText
-        android:id="@+id/editTextDate"
+        android:id="@+id/a_DOB"
         android:layout_width="359dp"
         android:layout_height="50dp"
         android:ems="10"
@@ -53,7 +54,41 @@
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/v_fullname" />
+        app:layout_constraintTop_toBottomOf="@+id/a_full_name"
+        android:autofillHints="27/12/2000" />
+
+    <RadioButton
+        android:id="@+id/male_radioButton"
+        android:layout_width="95dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/male"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/a_DOB" />
+
+    <RadioButton
+        android:id="@+id/female_radioButton2"
+        android:layout_width="95dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/female"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/male_radioButton"
+        app:layout_constraintTop_toBottomOf="@+id/a_DOB" />
+
+    <Button
+        android:id="@+id/PD_submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/done_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/female_radioButton2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

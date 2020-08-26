@@ -32,9 +32,9 @@ public class SigninActivity extends AppCompatActivity {
 
         EmAIL=(EditText)findViewById(R.id.v_emailid);
         PASSWORD=(EditText)findViewById(R.id.v_password);
-        CONFIRMPASSWORD=(EditText)findViewById(R.id.v_confrimpassword);
+        CONFIRMPASSWORD=(EditText)findViewById(R.id.v_confrim_password);
         USERNAME=(EditText)findViewById(R.id.v_username);
-        SIGNUP=(Button)findViewById(R.id.a_Signupbutton);
+        SIGNUP=(Button)findViewById(R.id.a_SignUp_button);
 
         firebaseAuth = FirebaseAuth.getInstance();
 //        databaseReference = firebaseDatabase.getInstance().getReference("Accounts");

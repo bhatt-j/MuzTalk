@@ -48,6 +48,15 @@
     <string name="full_name">Full Name</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="todo">TODO</string>
+    <string name="done_button">Done</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="my_music">My Music</string>
+    <string name="hey_there">Hey there,</string>
+    <string name="username">UserName</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="sign_up">Sign-up</string>
+    <string name="user_gmail">user@gmail.com</string>
     <!--<string name="map_keys" translatable="false">Enter your google API key here</string>-->
 
     <string-array name="settings_menu">
