@@ -1,6 +1,8 @@
 package com.example.muztalk;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -28,6 +30,18 @@ public class SettinglistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settinglist);
         getSupportActionBar().hide();
+
+        UPDATE_USERNAME.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { fun_updateUsername();
+            }
+
+
+        });
+
+
+
+
 
 
 
@@ -57,6 +71,12 @@ public class SettinglistActivity extends AppCompatActivity {
         });*/
 
     }
+
+    public void fun_updateUsername(){
+        Intent intent = new Intent(this,UpdateusernameActivity.class);
+        startActivity(intent);
+    }
+
 
    /* class MyAdapter1 extends ArrayAdapter<String >
     {
