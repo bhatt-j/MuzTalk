@@ -32,10 +32,11 @@
             android:layout_marginTop="8sp"
             android:background="#9EFFFFFF"
             android:fontFamily="serif"
-            android:text="TextView"
+            android:text="@string/textview"
             android:textColor="#000"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginStart="50dp" />
 
 
     </androidx.cardview.widget.CardView>

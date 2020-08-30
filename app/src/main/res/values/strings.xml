@@ -57,10 +57,15 @@
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign-up</string>
     <string name="user_gmail">user@gmail.com</string>
+    <string name="update_username">Update Username</string>
+    <string name="textview">TextView</string>
+    <string name="notifications">Notifications</string>
+    <string name="theme">Theme</string>
+    <string name="invite_friend">Invite Friend</string>
     <!--<string name="map_keys" translatable="false">Enter your google API key here</string>-->
 
     <string-array name="settings_menu">
-        <item>Personal Details</item>
+        <item>Update Username</item>
         <item>Notifications</item>
         <item>Theme</item>
         <item>invite friend</item>

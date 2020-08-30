@@ -3,7 +3,6 @@ package com.example.muztalk;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -22,9 +21,9 @@ public class SettingsActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
         s1=getResources().getStringArray(R.array.settings_menu);
 
-        MyAdapter MyAdapter = new MyAdapter(this,s1,icons);
+       /* MyAdapter MyAdapter = new MyAdapter(this,s1,icons);
         recyclerView.setAdapter(MyAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));*/
 
 
     }

@@ -39,7 +39,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class UserprofileActivity extends AppCompatActivity implements onActivityResult1 {
+public class UserprofileActivity extends AppCompatActivity {
     TextView useremail,username;
     ImageView profilepic;
     Task<Void> databaseReference;
@@ -167,7 +167,7 @@ public class UserprofileActivity extends AppCompatActivity implements onActivity
         startActivityForResult(intent,1000);
     }
     public void openSettingsActivity(){
-        Intent intent = new Intent(this, SettingsActivity.class);
+        Intent intent = new Intent(this, SettinglistActivity.class);
         startActivity(intent);
     }
 

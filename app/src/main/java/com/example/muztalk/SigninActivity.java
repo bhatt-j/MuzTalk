@@ -76,12 +76,7 @@ public class SigninActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        users information = new users(UserName);
-                                       /* FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                        DatabaseReference myRef = database.getReference("users");
-
-                                        myRef.setValue(UserName);*/
-
+                                        final users information = new users(UserName);
                                         databaseReference = FirebaseDatabase.getInstance().getReference("users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {

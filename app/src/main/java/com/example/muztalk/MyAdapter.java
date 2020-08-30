@@ -1,18 +1,32 @@
 package com.example.muztalk;
 
-import android.content.Context;
-import android.content.Intent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+//public class MyAdapter extends ArrayAdapter<MyAdapter.MyViewHolder> {
+    /*Context context;
+    String[] data1 ;
+    int[] images;
+    public MyAdapter(Context ct, String[] s1, int[] icons)
+    {
+        super(ct, R.layout.my_row,R.id.options);
+        this.context = ct;
+        this.data1 = s1;
+        this.images = icons;
+    }
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        assert layoutInflater != null;
+        @SuppressLint("ViewHolder") View myrow = layoutInflater.inflate(my_row, parent, false);
+        ImageView images = myrow.findViewById(R.id.icons);
+        TextView options = myrow.findViewById(R.id.options);
+        images.setImageResource(icons[position]);
+        options.setText(data1[position]);
+        return super.getView(position, convertView, parent);
+    }
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+    public class MyViewHolder {
+    }
     String[] data1;
     Context context;
     int[] images;
@@ -40,24 +54,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
            holder.my_layout.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-                   Intent intent = new Intent(context, PersonaldetailsActivity.class);
+                   Intent intent = new Intent(context, UpdateusernameActivity.class);
                    context.startActivity(intent);
 
-                   /*final Intent intent;
-                   switch (images.length){
-                       case 0:
-                           intent =  new Intent(context, PersonaldetailsActivity.class);
-                           break;
-
-                       case 1:
-                           intent =  new Intent(context, SecondActivity.class);
-                           break;
-
-                       default:
-                           intent =  new Intent(context, DefaultActivity.class);
-                           break;
-                   }
-                   context.startActivity(intent);*/
                }
            });
     }
@@ -79,5 +78,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             icn=itemView.findViewById(R.id.icons);
             my_layout=itemView.findViewById(R.id.my_layout);
         }
-    }
-}
+    }*/
+//}

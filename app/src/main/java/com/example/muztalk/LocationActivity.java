@@ -62,8 +62,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
 
 
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
+            // tod o: Consider calling
+            //  ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
