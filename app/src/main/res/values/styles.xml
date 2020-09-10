@@ -5,11 +5,32 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#008FEE</item>
         <item name="colorPrimaryDark">#E38EC1</item>
-        <item name="colorAccent">#00BCD4</item>
+        <item name="colorAccent">#E38EC1</item>
+        <item name="backgroundColor">#FFFFFF</item>
+        <item name="cardBackgroundColor">#FFFFFF</item>
+        <item name="textColor">#000000</item>
+        <item name="tintColor">#FFFFFF</item>
+        <item name="buttonColor">#000000</item>
+        <item name="white">#FFFFFF</item>
+
+    </style>
+
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#E38EC1</item>
+        <item name="colorAccent">#E38EC1</item>
+        <item name="backgroundColor">#0D0F10</item>
+        <item name="cardBackgroundColor">#000000</item>
+        <item name="textColor">#FFFFFF</item>
+        <item name="tintColor">#FFFFFF</item>
+        <item name="buttonColor">#E38EC1</item>
+        <item name="white">#2C2B2B</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>
     </style>
 

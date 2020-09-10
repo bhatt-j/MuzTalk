@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MenuActivity"
-    android:background="@drawable/grad_background">
+    android:background="?attr/backgroundColor">
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="315dp"
-        android:layout_height="286dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256"
-        app:srcCompat="@drawable/logo"
-        android:contentDescription="@string/todo" />
+        android:layout_height="206dp"
+        android:layout_marginTop="150dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/logo" />
 
     <Button
         android:id="@+id/a_myRoom"
@@ -27,10 +24,44 @@
         android:text="@string/my_room"
         android:textSize="50sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textColor="?attr/textColor"
+        android:layout_gravity="center"
+         />
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:textColor="?attr/textColor"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/round_corner">
+
+        <ImageView
+            android:id="@+id/a_user_profile"
+            android:layout_width="59dp"
+            android:layout_height="58dp"
+            app:srcCompat="@drawable/user_icon"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="59dp"
+            android:layout_height="58dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="37dp"
+            app:srcCompat="@drawable/search_icon"
+            tools:ignore="MissingConstraints,VectorDrawableCompat"
+            tools:layout_editor_absoluteY="2dp"
+            android:layout_marginEnd="37dp"
+            android:layout_marginStart="35dp" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="59dp"
+            android:layout_height="58dp"
+            app:srcCompat="@drawable/chats"
+            tools:ignore="VectorDrawableCompat"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="1dp" />
+    </LinearLayout>
+</LinearLayout>

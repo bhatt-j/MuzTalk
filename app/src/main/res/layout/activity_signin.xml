@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SigninActivity"
     android:background="@drawable/grad_background">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="209dp"
-        android:layout_height="201dp"
+        android:layout_width="249dp"
+        android:layout_height="281dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -42,6 +43,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/email_id"
+        android:textColor="#000"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.363"
@@ -50,6 +53,18 @@
         app:layout_constraintVertical_bias="0.563"
         android:importantForAutofill="no" />
 
+    <!--<EditText
+        android:id="@+id/a_DOB"
+        android:layout_width="368dp"
+        android:layout_height="50dp"
+        android:autofillHints="27/12/2000"
+        android:ems="10"
+        android:hint="@string/date_of_birth"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/a_full_name" />-->
+
     <EditText
         android:id="@+id/v_username"
         android:layout_width="367dp"
@@ -57,6 +72,8 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/username"
+        android:textColor="#000"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.318"
@@ -71,6 +88,8 @@
         android:layout_height="53dp"
         android:ems="10"
         android:hint="@string/password"
+        android:textColor="#000"
+        android:textStyle="bold"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,6 +105,8 @@
         android:layout_height="53dp"
         android:ems="10"
         android:hint="@string/confirm_password"
+        android:textColor="#000"
+        android:textStyle="bold"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,9 +118,13 @@
 
     <Button
         android:id="@+id/a_SignUp_button"
-        android:layout_width="194dp"
+        android:layout_width="315dp"
         android:layout_height="43dp"
         android:text="@string/sign_up"
+        android:layout_marginLeft="12dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:background="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.073"
@@ -115,4 +140,4 @@
          >-->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

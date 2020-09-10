@@ -2,7 +2,14 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#DA0359</color>
+
+    <color name="colorPrimaryNight">#0A0A13</color>
+    <color name="colorPrimaryDarkNight">#FF0066</color>
+    <color name="colorAccentNight">#FFFFFF</color>
+
+    <color name="textColor">#000000</color>
+    <color name="nightTextColor">#fff</color>
     <color name="address">#2F7092</color>
     <color name="followers">#0D5D98</color>
     <color name="headings">#3797CF</color>

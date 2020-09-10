@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MusicActivity">
@@ -29,14 +30,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"-->
-
+  <RelativeLayout android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:background="@drawable/grad_background"
+      >
   <TextView
       android:id="@+id/textView5"
       android:layout_width="match_parent"
       android:layout_height="67dp"
-      android:background="#000"
       android:text="@string/my_music"
-      android:textColor="#f89"
+      android:textColor="#000"
       android:textSize="40sp"
       android:textStyle="bold"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -44,14 +47,6 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.0" />
-
-  <ListView
-      android:id="@+id/a_mysonglist"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-
-      android:layout_marginTop="65dp" />
-
   <ImageView
       android:id="@+id/a_spotify"
       android:layout_width="wrap_content"
@@ -61,5 +56,14 @@
       android:layout_marginStart="335dp"
       android:contentDescription="@string/todo" />
 
-
 </RelativeLayout>
+  <ListView
+      android:id="@+id/a_mysonglist"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/backgroundColor"
+       />
+
+
+
+</LinearLayout>

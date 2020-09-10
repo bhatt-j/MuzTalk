@@ -34,7 +34,7 @@
     <string name="welcome1">Welcome back,</string>
     <string name="Email">Email</string>
     <string name="Log_in">Log-in</string>
-    <string name="new_user">new user?</string>
+    <string name="new_user">new user? Sign up</string>
     <string name="forget_password">forget password?</string>
     <string name="password">password</string>
     <string name="your_room1">Your Room</string>
@@ -59,9 +59,15 @@
     <string name="user_gmail">user@gmail.com</string>
     <string name="update_username">Update Username</string>
     <string name="textview">TextView</string>
-    <string name="notifications">Notifications</string>
-    <string name="theme">Theme</string>
+    <string name="notifications">NOTIFICATIONS</string>
+    <string name="theme">THEME</string>
     <string name="invite_friend">Invite Friend</string>
+    <string name="friends">Friends</string>
+    <string name="groups">Groups</string>
+    <string name="_0">0</string>
+    <string name="close">close drawer</string>
+    <string name="open">open drawer</string>
+    <string name="night_mode">NIGHT MODE</string>
     <!--<string name="map_keys" translatable="false">Enter your google API key here</string>-->
 
     <string-array name="settings_menu">

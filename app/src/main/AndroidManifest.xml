@@ -16,9 +16,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ChatActivity"></activity>
+
+        <service android:name=".get_device_token_service">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".MyFirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity android:name=".SettinglistActivity" />
         <activity android:name=".UpdateusernameActivity" />
-        <activity android:name=".PersonaldetailsActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".UserprofileActivity" />
         <activity android:name=".LocationActivity" />

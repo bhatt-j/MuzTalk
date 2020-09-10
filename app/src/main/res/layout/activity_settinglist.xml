@@ -6,29 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".SettinglistActivity"
     android:orientation="vertical"
-    android:background="@drawable/grad_background">
-
+    android:background="?attr/backgroundColor">
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="147dp"
+        android:background="@drawable/grad_background"
+        >
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="170dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:shadowColor="#3C7C7474"
         android:shadowDx="-5"
         android:shadowDy="-5"
         android:shadowRadius="1"
         android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
         android:text="@string/settings"
         android:textColor="#000"
-        android:textSize="40sp"
+        android:textSize="45sp"
         android:textStyle="bold"
-        android:layout_marginLeft="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="100dp" />
 
+         />
+    </RelativeLayout>
     <!--<ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,65 +36,83 @@
 
 
     <Button
-        android:id="@+id/a_update_pass"
-        android:layout_width="337dp"
+        android:id="@+id/a_update_username"
+        android:layout_width="match_parent"
+        android:textColor="?attr/textColor"
         android:layout_height="37dp"
         android:layout_marginTop="100dp"
         android:background="#00F4D19D"
         android:fontFamily="sans-serif-black"
-        android:gravity="left"
+        android:gravity="center"
         android:text="@string/update_username"
         android:textSize="25sp"
         android:textStyle="bold"
         tools:ignore="RtlHardcoded" />
 
-    <Button
-        android:id="@+id/a_notifications"
-        android:layout_width="337dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="10dp"
-        android:background="#00F4D19D"
-        android:fontFamily="sans-serif-black"
-        android:gravity="left"
-        android:text="@string/notifications"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
 
-    <Button
-        android:id="@+id/a_theme"
-        android:layout_width="337dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="10dp"
-        android:background="#00F4D19D"
-        android:fontFamily="sans-serif-black"
-        android:gravity="left"
-        android:text="@string/theme"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
+
+    <RelativeLayout android:layout_width="match_parent"
+    android:layout_height="47dp"
+    >
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/notifications"
+            android:checked="false"
+            android:fontFamily="sans-serif-black"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:thumbTint="#0000"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="?attr/textColor"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+</RelativeLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="47dp"
+        >
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/night_mode"
+            android:textColor="?attr/textColor"
+            android:fontFamily="sans-serif-black"
+            android:layout_marginTop="10dp"
+            android:thumbTint="#0000"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/a_invite_friend"
-        android:layout_width="337dp"
+        android:layout_width="match_parent"
         android:layout_height="37dp"
         android:layout_marginTop="10dp"
+        android:textColor="?attr/textColor"
         android:background="#00F4D19D"
         android:fontFamily="sans-serif-black"
-        android:gravity="left"
+        android:gravity="center"
         android:text="@string/invite_friend"
         android:textSize="25sp"
         android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
+         />
 
     <Button
         android:id="@+id/a_change_password"
-        android:layout_width="337dp"
+        android:layout_width="match_parent"
         android:layout_height="37dp"
         android:layout_marginTop="10dp"
         android:background="#00F4D19D"
+        android:textColor="?attr/textColor"
         android:fontFamily="sans-serif-black"
-        android:gravity="left"
+        android:gravity="center"
         android:text="@string/change_password"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -102,12 +120,13 @@
 
     <Button
         android:id="@+id/a_log_out"
-        android:layout_width="337dp"
+        android:layout_width="match_parent"
         android:layout_height="37dp"
         android:layout_marginTop="10dp"
         android:background="#00F4D19D"
         android:fontFamily="sans-serif-black"
-        android:gravity="left"
+        android:gravity="center"
+        android:textColor="?attr/textColor"
         android:text="@string/log_out"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -115,14 +134,15 @@
 
     <Button
         android:id="@+id/a_delete_acc"
-        android:layout_width="337dp"
+        android:layout_width="match_parent"
         android:layout_height="37dp"
         android:layout_marginTop="10dp"
         android:background="#00F4D19D"
         android:fontFamily="sans-serif-black"
-        android:gravity="left"
+        android:gravity="center"
         android:text="@string/delete_account"
         android:textSize="25sp"
+        android:textColor="?attr/textColor"
         android:textStyle="bold"
         tools:ignore="RtlHardcoded" />
 

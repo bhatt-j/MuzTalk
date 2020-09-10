@@ -24,6 +24,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class MusicActivity extends AppCompatActivity {
+
     private ListView listView;
      String[] SongNames ;
 
@@ -51,6 +52,17 @@ public class MusicActivity extends AppCompatActivity {
     }
 
 
+    int counter = 0;
+    @Override
+    public void onBackPressed()
+    {
+        counter++;
+        if(counter==1)
+        {
+            Intent intent = new Intent(this,RoomActivity.class);
+            startActivity(intent);
+        }
+    }
     public void runtime_permission()
     {
     Dexter.withContext(this)
@@ -104,6 +116,7 @@ public class MusicActivity extends AppCompatActivity {
         for(int i=0; i<mySongs.size();i++)
         {
             SongNames[i]=mySongs.get(i).getName().toString().replace("mp3","").replace(".wav","");
+            Toast.makeText(MusicActivity.this,SongNames[0],Toast.LENGTH_SHORT).show();
         }
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,SongNames);

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/a_update_username"
+            android:title="@string/update_username"
+            android:icon="@drawable/user_icon1"
+            />
+        <item
+            android:id="@+id/a_notifications"
+            android:title="@string/notifications"
+            android:icon="@drawable/notifications_icon"
+            />
+        <item
+            android:id="@+id/a_theme"
+            android:title="@string/theme"
+            android:icon="@drawable/theme_icon"
+            />
+        <item
+            android:id="@+id/a_invite_friend"
+            android:title="@string/invite_friend"
+            android:icon="@drawable/usergroup_icon"
+            />
+        <item
+            android:id="@+id/a_change_password"
+            android:title="@string/change_password"
+            android:icon="@drawable/password"
+            />
+        <item
+            android:id="@+id/a_log_out"
+            android:title="@string/log_out"
+            android:icon="@drawable/exit_icon"
+            />
+        <item
+            android:id="@+id/a_delete_acc"
+            android:title="@string/delete_account"
+            android:icon="@drawable/delete_icon"
+            />
+
+    </group>
+
+</menu>

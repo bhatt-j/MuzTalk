@@ -8,9 +8,16 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RoomActivity extends AppCompatActivity {
+    SharedPreff sharedPreff;
 
     @Override
      protected void onCreate(Bundle savedInstanceState) {
+        sharedPreff = new SharedPreff(this);
+        if(sharedPreff.loadNightModeState())
+        {
+            setTheme(R.style.DarkTheme);
+        }
+        else setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
         getSupportActionBar().hide();
@@ -43,14 +50,6 @@ public class RoomActivity extends AppCompatActivity {
             }
         });
 
-        final ImageView a_user_profile = (ImageView) findViewById(R.id.a_user_profile);
-        a_user_profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { openUser_profileActivity();
-            }
-
-
-        });
 
     }
 
@@ -64,10 +63,18 @@ public class RoomActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openUser_profileActivity(){
-        Intent intent = new Intent(this,UserprofileActivity.class);
-        startActivity(intent);
+    int counter = 0;
+    @Override
+    public void onBackPressed()
+    {
+        counter++;
+        if(counter==1)
+        {
+            Intent intent = new Intent(this,MenuActivity.class);
+            startActivity(intent);
+        }
     }
+
 
 
 }

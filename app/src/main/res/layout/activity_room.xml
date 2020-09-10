@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RoomActivity"
+    android:background="?attr/backgroundColor"
     >
 
     <ImageView
@@ -28,6 +29,7 @@
         android:text="@string/your_room1"
         android:textSize="50sp"
         android:textStyle="bold"
+        android:textColor="?attr/textColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.531"
@@ -87,39 +89,6 @@
         android:contentDescription="@string/todo" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:background="#E38EC1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.559"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        >
 
-        <ImageView
-            android:id="@+id/a_user_profile"
-            android:layout_width="59dp"
-            android:layout_height="58dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/user_icon"
-            tools:ignore="VectorDrawableCompat"
-            android:contentDescription="@string/todo"/>
-
-        <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="59dp"
-            android:layout_height="58dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/search_icon"
-            tools:ignore="MissingConstraints,VectorDrawableCompat"
-            tools:layout_editor_absoluteY="3dp"
-            android:contentDescription="@string/todo"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
