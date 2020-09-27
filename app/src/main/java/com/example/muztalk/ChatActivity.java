@@ -1,8 +1,8 @@
 package com.example.muztalk;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
 
 public class ChatActivity extends AppCompatActivity {
 
