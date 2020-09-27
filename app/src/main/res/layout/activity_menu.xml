@@ -29,7 +29,7 @@
          />
 
     <LinearLayout
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:textColor="?attr/textColor"
@@ -40,27 +40,20 @@
             android:id="@+id/a_user_profile"
             android:layout_width="59dp"
             android:layout_height="58dp"
+            android:layout_marginRight="20dp"
             app:srcCompat="@drawable/user_icon"
-            tools:ignore="VectorDrawableCompat" />
+            tools:ignore="VectorDrawableCompat"
+            app:tint="?attr/textColor"
+            android:layout_marginEnd="20dp" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/a_chat"
             android:layout_width="59dp"
-            android:layout_height="58dp"
-            android:layout_marginLeft="35dp"
-            android:layout_marginRight="37dp"
-            app:srcCompat="@drawable/search_icon"
-            tools:ignore="MissingConstraints,VectorDrawableCompat"
-            tools:layout_editor_absoluteY="2dp"
-            android:layout_marginEnd="37dp"
-            android:layout_marginStart="35dp" />
-
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="59dp"
-            android:layout_height="58dp"
+            android:layout_height="55dp"
             app:srcCompat="@drawable/chats"
             tools:ignore="VectorDrawableCompat"
+            android:layout_marginTop="3dp"
+            app:tint="?attr/textColor"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="1dp" />
     </LinearLayout>

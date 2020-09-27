@@ -1,4 +1,4 @@
-package com.example.muztalk;
+package com.example.muztalk.model;
 
 public class ModelUsers {
     String username,imageURL,id,search,status;

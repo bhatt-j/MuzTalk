@@ -12,23 +12,30 @@
         <item name="tintColor">#FFFFFF</item>
         <item name="buttonColor">#000000</item>
         <item name="white">#FFFFFF</item>
+        <item name="chat_tool">#FFFFFF</item>
+
 
     </style>
 
     <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#000000</item>
-        <item name="colorPrimaryDark">#E38EC1</item>
+        <item name="colorPrimaryDark">#171717</item>
         <item name="colorAccent">#E38EC1</item>
-        <item name="backgroundColor">#0D0F10</item>
+        <item name="backgroundColor">#141415</item>
         <item name="cardBackgroundColor">#000000</item>
         <item name="textColor">#FFFFFF</item>
         <item name="tintColor">#FFFFFF</item>
         <item name="buttonColor">#E38EC1</item>
         <item name="white">#2C2B2B</item>
+        <item name="chat_tool">#252525</item>
+
 
     </style>
 
+    <style name="MenuStyle" parent="Theme.AppCompat.Light">
+        <item name="android:background">@android:color/white</item>
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">true</item>

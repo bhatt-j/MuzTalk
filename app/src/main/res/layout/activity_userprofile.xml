@@ -36,9 +36,10 @@
 
             <RelativeLayout
                 android:id="@+id/imgUser"
-                android:layout_width="185dp"
+                android:layout_width="match_parent"
                 android:layout_height="185dp"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_marginTop="170dp"
                 >
 
@@ -58,23 +59,35 @@
                     tools:ignore="VectorDrawableCompat"
                     android:contentDescription="@string/todo" />
 
+
             </RelativeLayout>
-
-
-            <TextView
-                android:id="@+id/username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imgUser"
+            <RelativeLayout
+                android:id="@+id/i"
+                android:layout_width="match_parent"
+                android:layout_height="135dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="15dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="@string/username"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="45sp" />
+                android:layout_marginTop="290dp"
+                android:gravity="center"
+                >
+            <ProgressBar
+                android:id="@+id/image_progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp" />
 
-
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="60dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="..."
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="45sp" />
+            </RelativeLayout>
             <ImageView
                 android:id="@+id/a_settings"
                 android:layout_width="40dp"
@@ -84,17 +97,22 @@
                 android:layout_marginRight="15dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_settings"
+                app:srcCompat="@drawable/ic_settings"
                 android:contentDescription="@string/todo"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="15dp" />
+                android:layout_marginEnd="15dp"
+                tools:ignore="VectorDrawableCompat" />
 
 
 
         </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="460dp"
+            android:gravity="center">
         <LinearLayout android:layout_height="120dp"
             android:layout_width="160dp"
-            android:layout_marginTop="460dp"
             android:layout_marginLeft="5dp"
             android:background="@drawable/grad2"
             android:orientation="vertical"
@@ -122,16 +140,14 @@
                 android:text="@string/friends"
                 android:textColor="@color/white"
                 android:textSize="40sp"
-                android:textStyle="bold" />
+                />
         </LinearLayout>
         <LinearLayout
             android:layout_height="120dp"
             android:layout_width="160dp"
-            android:layout_marginTop="460dp"
-            android:layout_marginLeft="185dp"
             android:background="@drawable/grad2"
             android:orientation="vertical"
-            android:layout_marginStart="185dp">
+            android:layout_marginStart="20dp">
 
             <TextView
                 android:id="@+id/no_of_groups"
@@ -155,7 +171,8 @@
                 android:text="@string/groups"
                 android:textColor="@color/white"
                 android:textSize="40sp"
-                android:textStyle="bold" />
+                 />
+        </LinearLayout>
         </LinearLayout>
 
         <RelativeLayout

@@ -27,8 +27,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 public class SigninActivity extends AppCompatActivity {
@@ -36,7 +38,9 @@ public class SigninActivity extends AppCompatActivity {
     EditText EmAIL,PASSWORD,CONFIRM_PASSWORD,USERNAME,DOB;
     Button SIGN_UP;
     Context mContext;
-
+    FirebaseUser user;
+    String id;
+    DatabaseReference databasereference;
     Task<Void> databaseReference;
     FirebaseAuth firebaseAuth;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -60,9 +64,9 @@ public class SigninActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = EmAIL.getText().toString().trim();
                 String pass = PASSWORD.getText().toString().trim();
-                final String UserName = USERNAME.getText().toString().trim();
+                final String username = USERNAME.getText().toString().trim();
                 String c_pass = CONFIRM_PASSWORD.getText().toString().trim();
-//                final String DoB = DOB.getText().toString().trim();
+                final String DoB = DOB.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email))
                 {
@@ -88,98 +92,116 @@ public class SigninActivity extends AppCompatActivity {
 
                 if(pass.equals(c_pass))
                 {
-
-                    firebaseAuth.createUserWithEmailAndPassword(email, pass)
-                            .addOnCompleteListener(SigninActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-
-
-                                        final users information = new users(UserName);
-                                        databaseReference = FirebaseDatabase.getInstance().getReference("users")
-                                                .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
-                                                .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                                                        Toast.makeText(SigninActivity.this, "SIGN-UP COMPLETED.",
-                                                                Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-
-                                        mContext = getApplicationContext();
-                                        Resources mResources = getResources();
-
-                                        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
-                                        builder.setSmallIcon(R.drawable.logo);
-                                        Bitmap bitmap = BitmapFactory.decodeResource(mResources, R.drawable.logo);
-                                        builder.setLargeIcon(bitmap);
-                                        builder.setContentTitle("Sign-in Successful");
-                                        builder.setContentText("Welcome to MuzTalk.");
-                                        int notificationId = 1;
-                                        Intent intent = new Intent(SigninActivity.this,MenuActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-                                        {
-                                            String channelId = "1";
-                                            NotificationChannel channel = new NotificationChannel(
-                                                    channelId,
-                                                    "Channel human readable title",
-                                                    NotificationManager.IMPORTANCE_HIGH);
-                                            assert manager != null;
-                                            manager.createNotificationChannel(channel);
-                                            builder.setChannelId(channelId);
-                                        }
-                                         assert manager != null;
-                                         manager.notify(notificationId, builder.build());
-
-                                        FirebaseUser user = firebaseAuth.getCurrentUser();
-
-
-                                         assert user != null;
-                                         user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    Toast.makeText(SigninActivity.this, "Verification email has been sent.",
-                                                            Toast.LENGTH_SHORT).show();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(SigninActivity.this, "email can't sent.",
-                                                            Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
-
-
-                                }
-                            });
+                    register(username,email,pass,DoB);
                 }
                 else
                 {
                     Toast.makeText(SigninActivity.this, "Cannot match password",
                             Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
 
 
     }
 
+    private void register(String username, String email, String pass,String DoB) {
+
+        firebaseAuth.createUserWithEmailAndPassword(email, pass)
+                .addOnCompleteListener(SigninActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful())
+                        {
+                            user = firebaseAuth.getCurrentUser();
+                            id = user.getUid();
+
+                            databasereference = FirebaseDatabase.getInstance().getReference("users").child(id);
+                            HashMap<String, String > H_Map = new HashMap<>();
+                            H_Map.put("id",id);
+                            H_Map.put("username", username);
+                            H_Map.put("search", username.toLowerCase());
+                            H_Map.put("imageURL", "default");
+                            H_Map.put("DOB", DoB);
+                            H_Map.put("status", "New");
+
+
+                            databasereference.setValue(H_Map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                    Toast.makeText(SigninActivity.this, "SIGN-UP COMPLETED.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        mContext = getApplicationContext();
+                        Resources mResources = getResources();
+
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext);
+                        builder.setSmallIcon(R.drawable.logo);
+                        Bitmap bitmap = BitmapFactory.decodeResource(mResources, R.drawable.logo);
+                        builder.setLargeIcon(bitmap);
+                        builder.setContentTitle("Sign-in Successful");
+                        builder.setContentText("Welcome to MuzTalk.");
+                        int notificationId = 1;
+                        Intent intent = new Intent(SigninActivity.this,MenuActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                        {
+                            String channelId = "1";
+                            NotificationChannel channel = new NotificationChannel(
+                                    channelId,
+                                    "Channel human readable title",
+                                    NotificationManager.IMPORTANCE_HIGH);
+                            assert manager != null;
+                            manager.createNotificationChannel(channel);
+                            builder.setChannelId(channelId);
+                        }
+                        assert manager != null;
+                        manager.notify(notificationId, builder.build());
+                        assert user != null;
+                        user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(SigninActivity.this, "Verification email has been sent.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(SigninActivity.this, "Verification FAILED",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                    }
+                });
+    }
+
 }
 
 
     /*final users information = new users(UserName);
-                                        databaseReference = FirebaseDatabase.getInstance().getReference("users")
-                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                                .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
-@Override
-public void onComplete(@NonNull Task<Void> task) {
-        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-        Toast.makeText(SigninActivity.this, "SIGN-UP COMPLETED.",
-        Toast.LENGTH_SHORT).show();
-        }
-        });*/
+        reference = FirebaseDatabase.getInstance().getReference("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+                        Toast.makeText(SigninActivity.this, "SIGN-UP COMPLETED.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //check if user is null
+        if (firebaseUser != null){
+            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();*/

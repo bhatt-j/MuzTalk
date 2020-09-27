@@ -1,16 +1,18 @@
-package com.example.muztalk;
+package com.example.muztalk.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.muztalk.ChatActivity;
+import com.example.muztalk.R;
 import com.example.muztalk.model.ModelUsers;
 import com.squareup.picasso.Picasso;
 
@@ -39,6 +41,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
 
         //getdata
+        String hisUID = usersList.get(position).getId();
         String userImage = usersList.get(position).getImageURL();
         String userName = usersList.get(position).getUsername();
 
@@ -58,7 +61,9 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "clicked",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, ChatActivity.class);
+                intent.putExtra("hisUID",hisUID);
+                context.startActivity(intent);
             }
         });
 

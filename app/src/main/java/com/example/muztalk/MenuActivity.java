@@ -9,8 +9,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+
 public class MenuActivity extends AppCompatActivity {
     SharedPreff sharedPreff;
+    ImageView PROFILE,CHATS;
+    FirebaseUser firebaseUser;
+    DatabaseReference reference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,31 +34,75 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         getSupportActionBar().hide();
-
-
-
-        final Button a_myRoom = (Button) findViewById(R.id.a_myRoom);
-        a_myRoom.setOnClickListener(new View.OnClickListener() {
+        PROFILE = findViewById(R.id.a_user_profile);
+        CHATS = findViewById(R.id.a_chat);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
+        CHATS.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { openRoomActivity();
+            public void onClick(View v) {
+              /*UserlistFragment userlistFragment = new UserlistFragment();
+                FragmentTransaction ft_user = getSupportFragmentManager().beginTransaction();
+                ft_user.replace(R.id.container,userlistFragment,"");
+                ft_user.commit();*/
+                open_user();
             }
-
-
         });
 
-        final ImageView a_user_profile = (ImageView) findViewById(R.id.a_user_profile);
-        a_user_profile.setOnClickListener(new View.OnClickListener() {
+
+        final Button a_myRoom = findViewById(R.id.a_myRoom);
+        a_myRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                openRoomActivity();
+            }
+        });
+
+
+        PROFILE.setOnClickListener(new View.OnClickListener()
+        {
             public void onClick(View v) { openUser_profileActivity();
             }
 
 
         });
     }
-    public void openRoomActivity(){
+
+    private void open_user()
+    {
+        Intent intent = new Intent(this,
+                TotalchatsActivity.class);
+        startActivity(intent);
+    }
+    public void openRoomActivity()
+    {
         Intent intent = new Intent(this,RoomActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
     }
+
+
+    private void status(String status){
+
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+        reference.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("Active");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("Inactive");
+    }
+
     int counter = 0;
     @Override
     public void onBackPressed()
@@ -62,12 +117,13 @@ public class MenuActivity extends AppCompatActivity {
             Toast.makeText(MenuActivity.this,"Cannot move back.",Toast.LENGTH_SHORT).show();
         }
     }
-
     @Override
-    public void finish(){
+    public void finish()
+    {
         super.finish();
     }
-    public void openUser_profileActivity(){
+    public void openUser_profileActivity()
+    {
         Intent intent = new Intent(this,UserprofileActivity.class);
         startActivity(intent);
     }

@@ -7,29 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MusicActivity">
 
-  <!--  <Button
-        android:id="@+id/button5"
-        android:layout_width="101dp"
-        android:layout_height="53dp"
-        android:background="#000"
-        android:text="Online"
-        android:textColor="#f89"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="320dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />-->
 
-    <!--    app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"-->
   <RelativeLayout android:layout_width="match_parent"
       android:layout_height="60dp"
       android:background="@drawable/grad_background"
@@ -62,8 +40,30 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="?attr/backgroundColor"
-       />
-
-
+      tools:targetApi="lollipop" />
 
 </LinearLayout>
+
+    <!--  <Button
+           android:id="@+id/button5"
+           android:layout_width="101dp"
+           android:layout_height="53dp"
+           android:background="#000"
+           android:text="Online"
+           android:textColor="#f89"
+           android:textSize="25dp"
+           android:textStyle="bold"
+           android:layout_marginLeft="320dp"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="1.0"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintVertical_bias="1.0" />-->
+
+    <!--    app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"-->

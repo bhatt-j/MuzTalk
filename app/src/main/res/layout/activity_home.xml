@@ -42,7 +42,7 @@
         android:layout_width="340dp"
         android:layout_height="59dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:textColor="?attr/textColor"
         android:textStyle="bold"
         android:hint="@string/Email"

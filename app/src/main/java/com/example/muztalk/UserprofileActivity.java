@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -52,6 +54,8 @@ import java.util.Date;
 import java.util.Locale;
 
 public class UserprofileActivity extends AppCompatActivity {
+    ProgressBar PROGRESSBAR;
+    File localfile;
     TextView USEREMAIL,USERNAME;
     ImageView profilepic;
     DatabaseReference FB_user;
@@ -60,6 +64,7 @@ public class UserprofileActivity extends AppCompatActivity {
     FirebaseUser user;
     String userid;
     DrawerLayout drawerLayout;
+    String get_username_FB;
     NavigationView navigationView;
     ImageView SETTINGS;
     Task<Void> databaseReference;
@@ -85,15 +90,36 @@ public class UserprofileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userprofile);
         getSupportActionBar().hide();
-        init();
 
-        readrealtimedata();
+
+        init();
+        PROGRESSBAR.setVisibility(View.GONE);
+        readRealTimeData();
+        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String dp_name = get_username_FB +"_Propic" + uid ;
+        String extension = ".jpeg";
+        storageReference.child("Profileimages/"+dp_name+extension);
+
+        try {
+            localfile = File.createTempFile(dp_name,"jpeg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        storageReference.getFile(localfile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Bitmap bitmap=BitmapFactory.decodeFile(localfile.getAbsolutePath());
+                        profilepic.setImageBitmap(bitmap);
+
+                    }
+                });
+
 
         profilepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                get_set_propic();
+                    get_set_propic();                                       //shows dialog box (gallery or camera)
 
             }
         });
@@ -118,6 +144,7 @@ public class UserprofileActivity extends AppCompatActivity {
         }
     }
     private void get_set_propic() {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(UserprofileActivity.this);
         builder.setTitle("Choose Profile Pic");
         builder.setPositiveButton("Camera", new DialogInterface.OnClickListener(){
@@ -154,29 +181,30 @@ public class UserprofileActivity extends AppCompatActivity {
         fStore = FirebaseFirestore.getInstance();
         user = firebaseAuth.getCurrentUser();
         userid = firebaseAuth.getCurrentUser().getUid();
-        USEREMAIL = (TextView) findViewById(R.id.useremail);
-        USERNAME = (TextView) findViewById(R.id.username);
+        USEREMAIL = findViewById(R.id.useremail);
+        USERNAME = findViewById(R.id.username);
         drawerLayout = findViewById(R.id.drawer_layout);
 //        navigationView = findViewById(R.id.nav_setting);
-        SETTINGS = (ImageView) findViewById(R.id.a_settings);
+        SETTINGS = findViewById(R.id.a_settings);
        // toolbar = findViewById(R.id.toolbar_set);
-
-
         FB_user = FirebaseDatabase.getInstance().getReference().child("users");
-
         captureImage = findViewById(R.id.profilepic);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
         profilepic = findViewById(R.id.profilepic);
+        PROGRESSBAR = findViewById(R.id.image_progressBar);
 
     }
 
-    private void readrealtimedata() {
+    private void readRealTimeData() {
         FB_user.child(userid)
                 .addValueEventListener(new ValueEventListener() {
+
+
+
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String get_username_FB = dataSnapshot.child("UserName").getValue(String.class);
+                        get_username_FB = dataSnapshot.child("username").getValue(String.class);
                        // String get_dob_FB = dataSnapshot.child("Date Of Birth").getValue(String.class);
 
                         USERNAME.setText(get_username_FB);
@@ -205,7 +233,7 @@ public class UserprofileActivity extends AppCompatActivity {
             if(imageFile!=null)
             {
                 FileProvider fileProvider = new FileProvider();
-                Uri imageUri = fileProvider.getUriForFile(this,"com.example.muztalk.fileprovider",imageFile);
+                Uri imageUri = FileProvider.getUriForFile(this,"com.example.muztalk.fileprovider",imageFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
                 startActivityForResult(intent,REQUEST_CODE_CAPTURE_IMAGE);
             }
@@ -250,42 +278,33 @@ public class UserprofileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public Bitmap getScaledBitmap(ImageView imageView)
-    {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        int scaleFactor = Math.min(
-                options.outWidth/imageView.getWidth(),
-                 options.outHeight/imageView.getHeight()
-        );
-        options.inJustDecodeBounds = false;
-        options.inSampleSize = scaleFactor;
-        options.inPurgeable = true;
-
-        return BitmapFactory.decodeFile(currentImagePath,options);
-    }
-    @Override
+       @Override
     protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data)
     {
+
         super.onActivityResult(requestCode,resultCode,data);
         if(requestCode==1000)
         {
             if(resultCode == Activity.RESULT_OK)
             {
+                PROGRESSBAR.setVisibility(View.VISIBLE);
+
                 assert data != null;
                 Uri imageUri = data.getData();
-                profilepic.setImageURI(imageUri);
+
                 final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                riversRef = storageReference.child("Profileimages/"+uid);
+                String dp_name = get_username_FB +"_Propic" + uid ;
+                riversRef = storageReference.child("Profileimages/"+dp_name);
 
                 assert imageUri != null;
                 riversRef.putFile(imageUri)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
                                 Snackbar.make(findViewById(android.R.id.content),"Profile pic uploaded",Snackbar.LENGTH_LONG).show();
-
-
+                                PROGRESSBAR.setVisibility(View.GONE);
+                                profilepic.setImageURI(imageUri);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -305,10 +324,12 @@ public class UserprofileActivity extends AppCompatActivity {
         {
             try{
                 //captureImage.setImageBitmap(getScaledBitmap(captureImage));
-                captureImage.setImageBitmap(BitmapFactory.decodeFile(currentImagePath));
+                PROGRESSBAR.setVisibility(View.VISIBLE);
+
                 Uri file = Uri.fromFile(new File(currentImagePath));
                 final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                riversRef = storageReference.child("Profileimages/"+uid);
+                String dp_name = get_username_FB +"_Propic" + uid ;
+                riversRef = storageReference.child("Profileimages/"+dp_name);
 
                 riversRef.putFile(file)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -317,7 +338,8 @@ public class UserprofileActivity extends AppCompatActivity {
                                 // Get a URL to the uploaded content
                                // Uri downloadUrl = taskSnapshot.getDownloadUrl();
                                 Snackbar.make(findViewById(android.R.id.content),"Profile pic uploaded",Snackbar.LENGTH_LONG).show();
-
+                                PROGRESSBAR.setVisibility(View.GONE);
+                                captureImage.setImageBitmap(BitmapFactory.decodeFile(currentImagePath));
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -326,6 +348,7 @@ public class UserprofileActivity extends AppCompatActivity {
                                 // Handle unsuccessful uploads
                                 // ...
                                 Snackbar.make(findViewById(android.R.id.content),"Cannot Profile pic uploaded",Snackbar.LENGTH_LONG).show();
+                                PROGRESSBAR.setVisibility(View.GONE);
                             }
                         });
 
@@ -349,3 +372,18 @@ public class UserprofileActivity extends AppCompatActivity {
                 startActivityForResult(openGalleryIntent,1000);*/
 //}
 //});
+/*public Bitmap getScaledBitmap(ImageView imageView)
+{
+    BitmapFactory.Options options = new BitmapFactory.Options();
+    options.inJustDecodeBounds = true;
+    int scaleFactor = Math.min(
+            options.outWidth/imageView.getWidth(),
+            options.outHeight/imageView.getHeight()
+    );
+    options.inJustDecodeBounds = false;
+    options.inSampleSize = scaleFactor;
+    options.inPurgeable = true;
+
+    return BitmapFactory.decodeFile(currentImagePath,options);
+}
+*/

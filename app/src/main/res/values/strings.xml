@@ -56,13 +56,12 @@
     <string name="username">UserName</string>
     <string name="confirm_password">Confirm password</string>
     <string name="sign_up">Sign-up</string>
-    <string name="user_gmail">user@gmail.com</string>
+    <string name="user_gmail">..@gmail.com</string>
     <string name="update_username">Update Username</string>
     <string name="textview">TextView</string>
     <string name="notifications">NOTIFICATIONS</string>
     <string name="theme">THEME</string>
     <string name="invite_friend">Invite Friend</string>
-    <string name="friends">Friends</string>
     <string name="groups">Groups</string>
     <string name="_0">0</string>
     <string name="close">close drawer</string>
@@ -71,12 +70,32 @@
     <!--<string name="map_keys" translatable="false">Enter your google API key here</string>-->
 
     <string-array name="settings_menu">
+        <item>Log-out</item>
+        <item>Delete Account</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder tex
         <item>Update Username</item>
         <item>Notifications</item>
         <item>Theme</item>
         <item>invite friend</item>
-        <item>Change Password</item>
-        <item>Log-out</item>
-        <item>Delete Account</item>
-    </string-array>
+        <item>Change Password</item>t -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="song_name">song name</string>
+    <string name="search">Search</string>
+    <string name="chat">Chat</string>
+    <string name="message">Message…</string>
+    <string name="hello">hello</string>
+    <string name="delete_all_chats">Delete All chats</string>
+    <string name="search_user">Search user</string>
+    <string name="date_format">DD/MM/YYYY</string>
+    <string name="users">Users</string>
+    <string name="friends">Friends</string>
+    <string name="chats">Chats</string>
+    <string name="typing">typing...</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>

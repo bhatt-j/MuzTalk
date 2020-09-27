@@ -22,8 +22,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import static java.util.Objects.requireNonNull;
 
@@ -34,13 +32,15 @@ public class HomeActivity extends AppCompatActivity {
     Button LOGIN;
     String mail;
     private FirebaseAuth firebaseAuth;
-    FirebaseDatabase rootNode;
+   /* FirebaseDatabase rootNode;
     DatabaseReference reference;
+    FirebaseUser auth_user;*/
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //FirebaseApp.initializeApp(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         requireNonNull(getSupportActionBar()).hide();
@@ -52,7 +52,6 @@ public class HomeActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
 
-
         LOGIN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -62,24 +61,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         //check user login or not
-        /*FirebaseAuth auth;
-        auth = FirebaseAuth.getInstance();
-
-        FirebaseUser auth_user = auth.getCurrentUser();
-        if(auth_user != null )
-        {
-            //already logged-in
-            startActivity(new Intent(this,MenuActivity.class));
-            finish();
-        }
-        else
-        {
-            //go to login activity
-            startActivity(new Intent(this,HomeActivity.class));
-            finish();
-
-        }*/
-
 
         final TextView a_new_user = findViewById(R.id.a_newuser);
         a_new_user.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +125,20 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         }
     }
+
+   /* @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        //check if user is null
+        if (firebaseUser != null){
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }*/
     private void login() {
         String l_email = L_EMAIL.getText().toString().trim();
         String l_pass;

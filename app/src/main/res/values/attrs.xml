@@ -8,6 +8,8 @@
         <attr name= "tintColor" format="color"/>
         <attr name= "buttonColor" format="color"/>
         <attr name= "white" format="color"/>
+        <attr name= "chat_tool" format="color"/>
+
 
     </declare-styleable>
 </resources>
