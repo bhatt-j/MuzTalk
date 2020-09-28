@@ -257,6 +257,3 @@ public class TotalchatsActivity extends AppCompatActivity {
         }
     }
  */
- /* Toolbar toolbar = findViewById(R.id.list_toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");*/

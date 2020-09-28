@@ -117,7 +117,7 @@ public class SigninActivity extends AppCompatActivity {
                             id = user.getUid();
 
                             databasereference = FirebaseDatabase.getInstance().getReference("users").child(id);
-                            HashMap<String, String > H_Map = new HashMap<>();
+                            HashMap<String, String> H_Map = new HashMap<>();
                             H_Map.put("id",id);
                             H_Map.put("username", username);
                             H_Map.put("search", username.toLowerCase());
@@ -183,25 +183,3 @@ public class SigninActivity extends AppCompatActivity {
     }
 
 }
-
-
-    /*final users information = new users(UserName);
-        reference = FirebaseDatabase.getInstance().getReference("users")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .setValue(information).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                        Toast.makeText(SigninActivity.this, "SIGN-UP COMPLETED.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        //check if user is null
-        if (firebaseUser != null){
-            Intent intent = new Intent(StartActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();*/

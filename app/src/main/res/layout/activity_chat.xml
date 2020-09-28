@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChatActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/chat_toolbar"
         android:layout_height="wrap_content"
@@ -40,7 +41,7 @@
     </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:backgroundTintMode="?attr/backgroundColor"
         android:layout_below="@+id/chat_toolbar"
         android:id="@+id/chat_recycler"
@@ -50,14 +51,18 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:background="@drawable/round_corner"
+        android:textColor="?attr/textColor"
         >
         <EditText
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:id="@+id/message"
             android:hint="@string/message"
             android:layout_weight="1"
             android:background="@null"
+            android:textColorHint="?attr/textColor"
+            android:textColor="?attr/textColor"
             android:inputType="textCapSentences|textMultiLine"
             android:padding="10dp"
             />
@@ -66,7 +71,15 @@
             android:background="@null"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:tint="?attr/textColor"
             android:src="@drawable/send_icon"/>
+        <ImageButton
+            android:id="@+id/send_gallery"
+            android:background="@null"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:tint="?attr/textColor"
+            android:src="@drawable/ic_baseline_photo_24"/>
     </LinearLayout>
 
 </RelativeLayout>

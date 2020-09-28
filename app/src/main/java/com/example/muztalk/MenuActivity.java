@@ -41,10 +41,6 @@ public class MenuActivity extends AppCompatActivity {
         CHATS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*UserlistFragment userlistFragment = new UserlistFragment();
-                FragmentTransaction ft_user = getSupportFragmentManager().beginTransaction();
-                ft_user.replace(R.id.container,userlistFragment,"");
-                ft_user.commit();*/
                 open_user();
             }
         });

@@ -55,7 +55,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
         }
         catch (Exception e)
         {
-
+            //failure
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
