@@ -31,17 +31,27 @@
             android:textStyle="bold"
             android:layout_marginStart="25dp" />
         <ImageView
+            android:id="@+id/voice_call"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            app:srcCompat="@drawable/video_call_icon" />
+        <ImageView
             android:id="@+id/imageView12"
             android:layout_width="36dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_weight="1"
-            app:srcCompat="@drawable/photo_camera_icon" />
+            app:srcCompat="@drawable/voice_call_icon" />
 
     </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="3dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="55dp"
         android:backgroundTintMode="?attr/backgroundColor"
         android:layout_below="@+id/chat_toolbar"
         android:id="@+id/chat_recycler"
@@ -51,6 +61,10 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:padding="1dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="2dp"
         android:background="@drawable/round_corner"
         android:textColor="?attr/textColor"
         >
@@ -60,7 +74,7 @@
             android:id="@+id/message"
             android:hint="@string/message"
             android:layout_weight="1"
-            android:background="@null"
+            android:background="?attr/backgroundColor"
             android:textColorHint="?attr/textColor"
             android:textColor="?attr/textColor"
             android:inputType="textCapSentences|textMultiLine"
@@ -68,18 +82,25 @@
             />
         <ImageButton
             android:id="@+id/btn_send"
-            android:background="@null"
+            android:background="?attr/backgroundColor"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:tint="?attr/textColor"
             android:src="@drawable/send_icon"/>
         <ImageButton
             android:id="@+id/send_gallery"
-            android:background="@null"
+            android:background="?attr/backgroundColor"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:tint="?attr/textColor"
             android:src="@drawable/ic_baseline_photo_24"/>
+        <ImageButton
+            android:id="@+id/camera_in_chat"
+            android:background="?attr/backgroundColor"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:tint="?attr/textColor"
+            android:src="@drawable/photo_camera_icon"/>
     </LinearLayout>
 
 </RelativeLayout>

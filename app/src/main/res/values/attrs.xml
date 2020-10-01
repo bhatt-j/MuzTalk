@@ -9,6 +9,11 @@
         <attr name= "buttonColor" format="color"/>
         <attr name= "white" format="color"/>
         <attr name= "chat_tool" format="color"/>
+        <attr name= "recv_chat" format="color"/>
+        <attr name= "send_chat" format="color"/>
+
+
+
 
 
     </declare-styleable>

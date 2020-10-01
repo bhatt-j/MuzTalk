@@ -14,7 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.muztalk.adapter.AdapterChat;
+import com.example.muztalk.model.ModelChat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +31,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import javax.crypto.Cipher;
@@ -35,6 +41,9 @@ import javax.crypto.Cipher;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ChatActivity extends AppCompatActivity {
+    ValueEventListener seenListener;
+    DatabaseReference userRefForSeen;
+
     SharedPreff sharedPreff;
     CircleImageView profile_image;
     TextView username;
@@ -48,7 +57,11 @@ public class ChatActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference userDBRef;
     //string
-    String userid,hisUID,myUID;
+    String userid,hisUID,myUID,hisImage;
+
+    List<ModelChat> chatList;
+    AdapterChat adapterChat;
+    RecyclerView recyclerView;
 
 
     @Override
@@ -63,6 +76,11 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         Objects.requireNonNull(getSupportActionBar()).hide();
         init();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         Intent intent = getIntent();
         hisUID = intent.getStringExtra("hisUID");
@@ -135,39 +153,89 @@ public class ChatActivity extends AppCompatActivity {
                         Log.e("Crypto", "RSA encryption error");
                     }
 
-                    Log.d("Encoded string: ", new String(Base64.encodeToString(encodedBytes, Base64.DEFAULT))); //It was originally published on https://www.apriorit.com/
-
-                    DatabaseReference df1 = FirebaseDatabase.getInstance().getReference();
-
-                    HashMap<String ,Object> hashM = new HashMap<>();
-                    hashM.put("sender",myUID);
-                    hashM.put("receiver",hisUID);
-                    hashM.put("message",encodedBytes);
-                    df1.child("Chats").push().setValue(hashM.toString());
-
-
-                    MSG.setText("");
-                   // SendMessage(encodedBytes);
+                    Log.d("Encoded string: ", new String(Base64.encodeToString(encodedBytes, Base64.DEFAULT)));
+                    assert encodedBytes != null;
+                    SendMessage(encodedBytes.toString());
                 }
             }
         });
 
+        readMessages();
 
+        SeenMessages();
     }
-    private void SendMessage(byte[] encMessage) {
+
+    private void SeenMessages() {
+        userRefForSeen = FirebaseDatabase.getInstance().getReference("Chats");
+        seenListener = userRefForSeen.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren())
+                {
+                    ModelChat chat = ds.getValue(ModelChat.class);
+                    if(chat.getReceiver().equals(myUID) && chat.getSender().equals(hisUID))
+                    {
+                        HashMap<String, Object> hasSeenHashMap = new HashMap<>();
+                        hasSeenHashMap.put("isseen",true);
+                        ds.getRef().updateChildren(hasSeenHashMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void readMessages() {
+        chatList = new ArrayList<>();
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Chats");
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chatList.clear();
+                for(DataSnapshot ds: snapshot.getChildren())
+                {
+                    ModelChat chat = ds.getValue(ModelChat.class);
+                    if(chat.getReceiver().equals(myUID) && chat.getSender().equals(hisUID) ||
+                            chat.getReceiver().equals(hisUID) && chat.getSender().equals(myUID))
+                    {
+                        chatList.add(chat);
+                    }
+                    adapterChat = new AdapterChat(ChatActivity.this, chatList,hisImage);
+                    adapterChat.notifyDataSetChanged();
+                                                                //set adapter to recycler view
+                    recyclerView.setAdapter(adapterChat);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void SendMessage(String Message) {
         DatabaseReference df1 = FirebaseDatabase.getInstance().getReference();
+
+        String timestamp = String.valueOf(System.currentTimeMillis());
 
         HashMap<String ,Object> hashM = new HashMap<>();
         hashM.put("sender",myUID);
         hashM.put("receiver",hisUID);
-        hashM.put("message",encMessage);
-        df1.child("Chats").push().setValue(hashM.toString());
+      //  hashM.put("message",encMessage);
+        hashM.put("message",Message);
+        hashM.put("timestamp",timestamp);
+        hashM.put("isseen",false);
+        df1.child("Chats").push().setValue(hashM);
 
 
         MSG.setText("");
     }
-    public void init()
-    {
+    public void init() {
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username_chat);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -177,20 +245,23 @@ public class ChatActivity extends AppCompatActivity {
         TOOLBAR = findViewById(R.id.chat_toolbar);
         MSG = findViewById(R.id.message);
         SEND_BUTTON = findViewById(R.id.btn_send);
+        recyclerView = findViewById(R.id.chat_recycler);
     }
-
-    private void checkUserStatus()
-    {
+    private void checkUserStatus() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user!=null)
         {
             myUID = user.getUid();
         }
     }
-
     @Override
     protected void onStart() {
         checkUserStatus();
         super.onStart();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        userRefForSeen.removeEventListener(seenListener);
     }
 }
