@@ -15,6 +15,7 @@
         <item name="chat_tool">#FFFFFF</item>
         <item name="recv_chat">#FBE8BD</item>
         <item name="send_chat">#F8B3DC</item>
+        <item name="online">#087E08</item>
 
 
 
@@ -34,6 +35,7 @@
         <item name="chat_tool">#252525</item>
         <item name="recv_chat">#0CEFD497</item>
         <item name="send_chat">#000</item>
+        <item name="online">#087E08</item>
 
     </style>
 

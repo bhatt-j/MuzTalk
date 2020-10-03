@@ -174,7 +174,7 @@ public class RoomActivity extends AppCompatActivity {
         counter++;
         if(counter==1)
         {
-            Intent intent = new Intent(this,MenuActivity.class);
+            Intent intent = new Intent(this,TotalchatsActivity.class);
             startActivity(intent);
         }
     }

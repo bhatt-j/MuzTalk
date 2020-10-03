@@ -139,7 +139,7 @@ public class UserprofileActivity extends AppCompatActivity {
         counter++;
         if(counter==1)
         {
-            Intent intent = new Intent(this,MenuActivity.class);
+            Intent intent = new Intent(this,TotalchatsActivity.class);
             startActivity(intent);
         }
     }
@@ -360,30 +360,3 @@ public class UserprofileActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
-
-//  profilepic.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//  public void onClick(View v) {
-//    choosePic();
-                /*Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(openGalleryIntent,1000);*/
-//}
-//});
-/*public Bitmap getScaledBitmap(ImageView imageView)
-{
-    BitmapFactory.Options options = new BitmapFactory.Options();
-    options.inJustDecodeBounds = true;
-    int scaleFactor = Math.min(
-            options.outWidth/imageView.getWidth(),
-            options.outHeight/imageView.getHeight()
-    );
-    options.inJustDecodeBounds = false;
-    options.inSampleSize = scaleFactor;
-    options.inPurgeable = true;
-
-    return BitmapFactory.decodeFile(currentImagePath,options);
-}
-*/

@@ -123,6 +123,7 @@ public class SigninActivity extends AppCompatActivity {
                             H_Map.put("search", username.toLowerCase());
                             H_Map.put("imageURL", "default");
                             H_Map.put("DOB", DoB);
+                            H_Map.put("Typingto", "None");
                             H_Map.put("status", "New");
 
 

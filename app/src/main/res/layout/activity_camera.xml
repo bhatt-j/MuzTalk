@@ -5,15 +5,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/backgroundColor"
         tools:context=".CameraActivity"
         android:id="@+id/frame_layout">
 
     <SurfaceView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:id="@+id/surfaceView_camera"/>
-    <RelativeLayout
+        android:id="@+id/surfaceView_camera">
+    </SurfaceView>
+    <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="top"
@@ -26,8 +26,8 @@
             android:src="@drawable/ic_baseline_cancel_24"
             app:tint="?attr/textColor"
             />
-    </RelativeLayout>
-    <RelativeLayout
+    </LinearLayout>
+    <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="end"
@@ -42,11 +42,12 @@
             app:tint="?attr/textColor"
             />
 
-    </RelativeLayout>
-        <RelativeLayout
+    </LinearLayout>
+        <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:gravity="center"
+            android:weightSum="1"
             android:layout_gravity="bottom"
             >
             <ImageView
@@ -57,6 +58,6 @@
                 android:src="@drawable/click_camera_icon"
                 android:onClick="captureImage"
                 app:tint="?attr/textColor" />
-        </RelativeLayout>
+        </LinearLayout>
     </FrameLayout>
 

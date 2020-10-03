@@ -12,11 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
+        android:padding="4dp"
         tools:ignore="MissingConstraints">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/logo"
+            app:civ_border_color="#000"
+            app:civ_border_width="1dp"
             android:id="@+id/user_list_dp"/>
 
         <LinearLayout
@@ -41,6 +44,7 @@
             android:layout_weight="1"
             android:textSize="15sp"
             android:paddingStart="20dp"
+            android:visibility="gone"
             android:paddingEnd="20dp"
             android:textColor="?attr/textColor"
             android:text="@string/typing" />

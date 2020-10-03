@@ -160,7 +160,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            startActivity(new Intent(getApplicationContext(),MenuActivity.class));
+                            startActivity(new Intent(getApplicationContext(),TotalchatsActivity.class));
                             Toast.makeText(HomeActivity.this, "Logged-in successfully", Toast.LENGTH_SHORT).show();
                                     /*rootNode = FirebaseDatabase.getInstance();
                                     reference= rootNode.getReference("username");

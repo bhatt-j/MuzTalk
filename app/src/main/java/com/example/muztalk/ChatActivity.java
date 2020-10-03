@@ -1,8 +1,12 @@
 package com.example.muztalk;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,8 +51,8 @@ public class ChatActivity extends AppCompatActivity {
     DatabaseReference userRefForSeen;
 
     SharedPreff sharedPreff;
-    CircleImageView profile_image;
-    TextView username;
+    CircleImageView PROFILE_IMAGE;
+    TextView username,STATUS;
     ImageButton SEND_BUTTON;
     EditText MSG;
     Toolbar TOOLBAR;
@@ -63,6 +69,8 @@ public class ChatActivity extends AppCompatActivity {
     AdapterChat adapterChat;
     RecyclerView recyclerView;
 
+    private static final int REQUEST_CODE_PERMISSION = 1;
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +119,29 @@ public class ChatActivity extends AppCompatActivity {
                         //exeption
                     }*/
 
+                    String hisStatus = ""+ds.child("status").getValue();
+                    String typingStatus = ""+ds.child("Typingto").getValue();
+
+                    if(typingStatus.equals(myUID))
+                    {
+                       STATUS.setVisibility(View.VISIBLE);
+                       STATUS.setText("Typing...");
+                    }
+                    else
+                    {
+                        if(hisStatus.equals("Active"))
+                        {
+                            STATUS.setVisibility(View.VISIBLE);
+                            STATUS.setText("Active");
+                            //PROFILE_IMAGE.setBorderWidth(5);
+                            //PROFILE_IMAGE.setBorderColor(R.attr.online);
+                        }
+                        else
+                        {
+                            STATUS.setVisibility(View.VISIBLE);
+                            STATUS.setText("Inactive");
+                        }
+                    }
                 }
             }
 
@@ -119,6 +150,33 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
+            ///////////////////////////////////////////////////////////////////////check typing
+        MSG.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().trim().length() == 0)
+                {
+                    fun_typing("None");
+                }
+                else
+                {
+                    fun_typing(hisUID);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
         SEND_BUTTON.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,11 +217,10 @@ public class ChatActivity extends AppCompatActivity {
                 }
             }
         });
-
         readMessages();
-
         SeenMessages();
     }
+
 
     private void SeenMessages() {
         userRefForSeen = FirebaseDatabase.getInstance().getReference("Chats");
@@ -188,7 +245,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-
     private void readMessages() {
         chatList = new ArrayList<>();
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Chats");
@@ -217,7 +273,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-
     private void SendMessage(String Message) {
         DatabaseReference df1 = FirebaseDatabase.getInstance().getReference();
 
@@ -236,8 +291,9 @@ public class ChatActivity extends AppCompatActivity {
         MSG.setText("");
     }
     public void init() {
-        profile_image = findViewById(R.id.profile_image);
+        PROFILE_IMAGE = findViewById(R.id.profile_image);
         username = findViewById(R.id.username_chat);
+        STATUS = findViewById(R.id.status);
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         FB_user = FirebaseDatabase.getInstance().getReference().child("users");
@@ -254,14 +310,49 @@ public class ChatActivity extends AppCompatActivity {
             myUID = user.getUid();
         }
     }
+    public void openCamera(View view) {
+        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(ChatActivity.this,new String[]{
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            },REQUEST_CODE_PERMISSION);
+        }
+        else
+        {
+            Intent intent = new Intent(this,CameraActivity.class);
+            startActivity(intent);
+        }
+    }
     @Override
     protected void onStart() {
         checkUserStatus();
         super.onStart();
     }
+    private void fun_typing(String typing){
+        reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("Typingto", typing);
+        reference.updateChildren(hashMap);
+    }
+    private void status(String status){
+        reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+        reference.updateChildren(hashMap);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("Active");
+    }
     @Override
     protected void onPause() {
         super.onPause();
         userRefForSeen.removeEventListener(seenListener);
+        status("Inactive");
+        fun_typing("None");
     }
+
 }

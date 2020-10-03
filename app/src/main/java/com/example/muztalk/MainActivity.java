@@ -3,6 +3,7 @@ package com.example.muztalk;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     FirebaseUser auth_user;
+    private static final int REQUEST_CODE_PERMISSION = 1;
     @Override
     protected void onStart() {
         super.onStart();
@@ -19,13 +21,12 @@ public class MainActivity extends AppCompatActivity {
         auth_user = firebaseAuth.getCurrentUser();
         if(auth_user != null )
         {
-           // startActivity(new Intent(this,MenuActivity.class));
-            //finish();
             int SPLASH_TIME_OUT = 3000;
             new Handler().postDelayed (new Runnable(){
                 @Override
                 public void run() {
-                    Intent homeIntent = new Intent(MainActivity.this, MenuActivity.class);
+                    Intent homeIntent = new Intent(MainActivity.this, TotalchatsActivity.class);
+                    homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(homeIntent);
 
                     finish();
@@ -53,5 +54,7 @@ public class MainActivity extends AppCompatActivity {
         }, SPLASH_TIME_OUT);
 
 
+    }
+    public void open_camera_story(View view) {
     }
 }

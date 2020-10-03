@@ -103,4 +103,6 @@
     <string name="delivered_5_00pm">delivered 5:00pm</string>
     <string name="send_message">send message</string>
     <string name="delivered">Delivered</string>
+    <string name="stories">Stories</string>
+    <string name="profile">Profile</string>
 </resources>

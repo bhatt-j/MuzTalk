@@ -1,11 +1,18 @@
 package com.example.muztalk;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -32,6 +39,8 @@ public class TotalchatsActivity extends AppCompatActivity {
     DatabaseReference FB_user;
     FirebaseAuth firebaseAuth;
     String userid;
+    private static final int REQUEST_CODE_PERMISSION = 1;
+    private int backpressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +87,23 @@ public class TotalchatsActivity extends AppCompatActivity {
 
     }
 
+    public void open_camera_story(View view)
+    {
+        if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(getApplicationContext(),Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(TotalchatsActivity.this,new String[]{
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            },REQUEST_CODE_PERMISSION);
+        }
+        else
+        {
+            Intent intent = new Intent(this,CameraActivity.class);
+            startActivity(intent);
+        }
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener selectedListener=
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -104,6 +130,21 @@ public class TotalchatsActivity extends AppCompatActivity {
                             FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
                             ft3.replace(R.id.content,friendslistFragment,"");
                             ft3.commit();
+                            return true;
+                        case R.id.profile:
+                            //fragment transaction
+                            Intent intent = new Intent(TotalchatsActivity.this,
+                                    UserprofileActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                            return true;
+                        case R.id.room:
+                            //fragment transaction
+                            Intent room_intent = new Intent(TotalchatsActivity.this,
+                                    RoomActivity.class);
+                            room_intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(room_intent);
+                            overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                             return true;
 
 
@@ -132,128 +173,18 @@ public class TotalchatsActivity extends AppCompatActivity {
         super.onPause();
         status("Inactive");
     }
+    int counter = 0;
+    @Override
+    public void onBackPressed()
+    {
+        if(counter==1)
+        {
+            Intent intent = new Intent(this,MenuActivity.class);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(TotalchatsActivity.this,"Cannot move back.",Toast.LENGTH_SHORT).show();
+        }
+    }
 }
-/*
- profile_image = findViewById(R.id.profile_image);
-        username = findViewById(R.id.username);
-
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                assert user != null;
-                username.setText(user.getUsername());
-                if (user.getImageURL().equals("default")){
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
-                } else {
-
-                    //change this
-                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profile_image);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        final TabLayout tabLayout = findViewById(R.id.tab_layout);
-        final ViewPager viewPager = findViewById(R.id.view_pager);
-
-
-        reference = FirebaseDatabase.getInstance().getReference("Chats");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-                int unread = 0;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    Chat chat = snapshot.getValue(Chat.class);
-                    if (chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isIsseen()){
-                        unread++;
-                    }
-                }
-
-                if (unread == 0){
-                    viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
-                } else {
-                    viewPagerAdapter.addFragment(new ChatsFragment(), "("+unread+") Chats");
-                }
-
-                viewPagerAdapter.addFragment(new UsersFragment(), "Users");
-
-                viewPager.setAdapter(viewPagerAdapter);
-
-                tabLayout.setupWithViewPager(viewPager);
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.logout) {
-            FirebaseAuth.getInstance().signOut();
-            // change this code beacuse your app will crash
-            startActivity(new Intent(TotalchatsActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            return true;
-        }
-
-        return false;
-    }
-
-    static class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        private ArrayList<Fragment> fragments;
-        private ArrayList<String> titles;
-
-        @SuppressLint("WrongConstant")
-        ViewPagerAdapter(FragmentManager fm){
-            super(fm, FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-            this.fragments = new ArrayList<>();
-            this.titles = new ArrayList<>();
-        }
-
-
-        @Override
-        public Fragment getItem(int position) {
-            return fragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return fragments.size();
-        }
-
-        public void addFragment(Fragment fragment, String title){
-            fragments.add(fragment);
-            titles.add(title);
-        }
-        // Ctrl + O
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles.get(position);
-        }
-    }
- */
