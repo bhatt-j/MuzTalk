@@ -1,24 +1,23 @@
-package com.example.muztalk.adapter;
+package com.example.muztalk.Adapters;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.muztalk.Models.ModelChat;
 import com.example.muztalk.R;
-import com.example.muztalk.model.ModelChat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,28 +29,25 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.security.Key;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
-import javax.crypto.Cipher;
 
 public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
 
     private static final int MSG_TYPE_LEFT = 0;
-    private static final int MSG_TYPE_RIGHT = 0;
+    private static final int MSG_TYPE_RIGHT = 1;
     FirebaseUser fUser;
     Context context;
     List<ModelChat> chatList;
     String imageUrl;
+    Key publicKey;
 
-    public AdapterChat(Context context, List<ModelChat> chatList, String imageUrl) {
+    public AdapterChat(Context context, List<ModelChat> chatList, String imageUrl, Key publicKey) {
         this.context = context;
         this.chatList = chatList;
         this.imageUrl = imageUrl;
+        this.publicKey = publicKey;
     }
 
     @NonNull
@@ -82,50 +78,42 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         String dateTime = DateFormat.format("dd/MM/yyyy hh:mm aa",cal).toString();
         int visiblity = 1;
 
-        //decrypt data
+        //////////////////////////////////////////////////////////////////////////////////////////decrypt data
 
-        Key publicKey = null;
-        Key privateKey = null;
+         //encodedBytes = null;
+
+        //Log.d("Decoded string: ", new String(encodedBytes));
+       /* byte[] decodedBytes = null;
         try {
-            KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-            kpg.initialize(2048);
-            KeyPair kp = kpg.genKeyPair();
-            publicKey = kp.getPublic();
-            privateKey = kp.getPrivate();
+            Cipher c = Cipher.getInstance("RSA");
+            c.init(Cipher.DECRYPT_MODE, publicKey);
+            decodedBytes = c.doFinal(MESSAGE.getBytes());
         } catch (Exception e) {
-            Log.e("Crypto", "RSA key pair error");
-        }
+            Log.e("Crypto", "RSA decryption error");
+        }*/
+//        Log.d("Decoded string: ", new String(decodedBytes));
+  //      String DECRYPTED_MSG = new String(decodedBytes);
 
-        byte[] decodedBytes = null;
-        byte[] decode_msg = null;
+
+
+
+        /*byte[] decode_msg = null;
         decode_msg = MESSAGE.getBytes();
-        try {
-            Cipher c = Cipher.getInstance("RSA");
-            c.init(Cipher.DECRYPT_MODE, publicKey);
-            decodedBytes = c.doFinal(decode_msg);
-        } catch (Exception e) {
-            Log.e("Crypto", "RSA decryption error");
-        }
-      Log.d("Decoded string: ", new String(decodedBytes));
-        String decrypted_msg = new String(decodedBytes);
-
-
+        //Log.d("Message to bytes: ", String.valueOf(decode_msg));
         byte[] DECODEDBYTES = null;
-
+        Log.d("PUBLIC Key: ", String.valueOf(publicKey));
         try {
             Cipher c = Cipher.getInstance("RSA");
             c.init(Cipher.DECRYPT_MODE, publicKey);
-            DECODEDBYTES = c.doFinal(decodedBytes);
+            DECODEDBYTES = c.doFinal(decode_msg);
         } catch (Exception e) {
             Log.e("Crypto", "RSA decryption error");
         }
-        Log.d("Decoded string: ", new String(DECODEDBYTES));
-        String DECRYPTED_MSG = new String(DECODEDBYTES);
+//        Log.d("Decoded string: ", new String(DECODEDBYTES));
+        String DECRYPTED_MSG = new String(DECODEDBYTES);*/
 
-
-
-        //setdata
-        holder.MESSAGE.setText(decrypted_msg);
+        /////////////////////////////////////////////////////////////////////////////////////////////setdata
+        holder.MESSAGE.setText(MESSAGE);
         holder.TIME.setVisibility(visiblity);
         holder.TIME.setText(dateTime);
         try{
@@ -137,18 +125,12 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         }
 
         /////////////////////////////////////////////////////////////////////click to show delete dialog box
-        /*holder.MESSAGELAYOUT.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return true;
-            }
-        });*/
 
         holder.MESSAGELAYOUT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Delete");
+                builder.setTitle("Permanent Message Delete");
                 builder.setMessage("Are you sure?");
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
@@ -166,8 +148,6 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
                 builder.create().show();
             }
         });
-
-
         /////////////////////////////////////////////////////////////////////set seen/delivered status
         if(position==chatList.size()-1)
         {
@@ -185,10 +165,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         {
             holder.SEEN_STATUS.setVisibility(View.GONE);
         }
-
-
-    }
-
+    }///////
     private void DeleteMessage(int position) {
         //compare timestamp of selected and stored message and delete
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -204,11 +181,11 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
                     if(ds.child("sender").getValue().equals(myUID))
                     {
                         ////////////////////////////////////////////////////////////1)remove message from Chats
-                        //ds.getRef().removeValue();
+                        ds.getRef().removeValue();
                         ////////////////////////////////////////////////////////////2)set the value as "This message was deleted..."
-                        HashMap<String, Object> hashMap = new HashMap<>();
+                        /*HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("message","This message was deleted...");
-                        ds.getRef().updateChildren(hashMap);
+                        ds.getRef().updateChildren(hashMap);*/
                         Toast.makeText(context,"message deleted...",Toast.LENGTH_LONG).show();
                     }
                     else
@@ -249,7 +226,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
     {
         ImageView RECV_PROFILE_PIC;
         TextView MESSAGE, TIME, SEEN_STATUS;
-        RelativeLayout MESSAGELAYOUT;//for click listener to show delete
+        LinearLayout MESSAGELAYOUT;//for_click_listener_to_show_delete
         public MyHolder(@NonNull View itemView) {
             super(itemView);
 

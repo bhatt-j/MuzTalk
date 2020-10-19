@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:id="@+id/messageLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_height="wrap_content"
@@ -20,6 +21,16 @@
             android:text="@string/send_message"
             android:id="@+id/message"
             tools:ignore="RtlSymmetry" />
+        <!--<ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:padding="10dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_photo_24"
+            android:background="@drawable/bg_sender"
+            />-->
+            
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"

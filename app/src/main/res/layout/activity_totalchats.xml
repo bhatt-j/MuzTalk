@@ -32,7 +32,7 @@
             android:textStyle="bold"
             android:layout_marginStart="25dp" />
          <ImageView
-             android:id="@+id/imageView12"
+             android:id="@+id/face_camera"
              android:layout_width="36dp"
              android:layout_height="match_parent"
              android:onClick="open_camera_story"

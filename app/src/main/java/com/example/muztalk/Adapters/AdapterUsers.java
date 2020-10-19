@@ -1,4 +1,4 @@
-package com.example.muztalk.adapter;
+package com.example.muztalk.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.muztalk.ChatActivity;
 import com.example.muztalk.R;
-import com.example.muztalk.model.ModelUsers;
+import com.example.muztalk.Models.ModelUsers;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

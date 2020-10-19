@@ -68,9 +68,6 @@ public class PlayerActivity extends AppCompatActivity {
             }
         };
 
-
-
-
         if(mp != null){
             mp.stop();
             mp.release();

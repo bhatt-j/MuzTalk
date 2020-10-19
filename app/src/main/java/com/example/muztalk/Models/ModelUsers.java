@@ -1,20 +1,22 @@
-package com.example.muztalk.model;
+package com.example.muztalk.Models;
 
 public class ModelUsers {
-    String username,imageURL,id,search,status;
+    String username,imageURL,id,search,status,Typingto;
 
-    public ModelUsers(String username, String imageURL, String id, String search, String status) {
+    public ModelUsers(String username, String imageURL, String id, String search, String status, String typingto) {
         this.username = username;
         this.imageURL = imageURL;
         this.id = id;
         this.search = search;
         this.status = status;
+        Typingto = typingto;
     }
 
     public ModelUsers()
     {
 
     }
+
     public String getUsername() {
         return username;
     }
@@ -54,4 +56,8 @@ public class ModelUsers {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getTypingto() { return Typingto; }
+
+    public void setTypingto(String typingto) { Typingto = typingto; }
 }

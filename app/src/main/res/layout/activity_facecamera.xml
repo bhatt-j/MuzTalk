@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FacecameraActivity"
+    android:keepScreenOn="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+
+        <com.example.muztalk.camera.CameraSourcePreview
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.example.muztalk.camera.GraphicOverlay
+                android:id="@+id/faceOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.example.muztalk.camera.CameraSourcePreview>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:paddingBottom="5dp">
+                <ImageButton
+                    android:id="@+id/flash"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    app:tint="?attr/textColor"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/flash" />
+
+                <ImageButton
+                    android:id="@+id/flip_camera"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="75dp"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    app:tint="?attr/textColor"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/flip_camera" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:paddingBottom="5dp">
+
+                <ImageButton
+                    android:id="@+id/capture_image"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:scaleType="fitXY"
+                    app:tint="?attr/textColor"
+                    android:src="@drawable/click_camera_icon" />
+
+                <ImageButton
+                    android:id="@+id/face"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    app:tint="?attr/textColor"
+                    android:background="#00000000"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/face" />
+            </RelativeLayout>
+
+            <HorizontalScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_alignParentBottom="true"
+                android:scrollbars="none"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/no_filter"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background_select"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_no_filter" />
+
+                    <ImageButton
+                        android:id="@+id/snap"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_snap" />
+
+                    <ImageButton
+                        android:id="@+id/dog"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_dog" />
+
+                    <ImageButton
+                        android:id="@+id/glasses2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_glasses2" />
+
+                    <ImageButton
+                        android:id="@+id/glasses3"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_glasses3" />
+
+                    <ImageButton
+                        android:id="@+id/glasses4"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_glasses4" />
+
+                    <ImageButton
+                        android:id="@+id/glasses5"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_glasses5" />
+
+                    <ImageButton
+                        android:id="@+id/mask"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_mask" />
+
+                    <ImageButton
+                        android:id="@+id/mask2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_mask2" />
+
+                    <ImageButton
+                        android:id="@+id/mask3"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_mask3" />
+                    <ImageButton
+                        android:id="@+id/hair"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_hair" />
+
+                    <ImageButton
+                        android:id="@+id/cat2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_cat2" />
+
+                    <ImageButton
+                        android:id="@+id/op"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/round_background"
+                        android:scaleType="fitXY"
+                        app:srcCompat="@drawable/fc_op" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

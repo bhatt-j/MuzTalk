@@ -48,11 +48,11 @@ public class CameraActivity extends AppCompatActivity {
         frameLayout.addView(showCamera);
         surfaceHolder = surfaceView.getHolder();
         jpegCallback = new Camera.PictureCallback() {
-            @SuppressLint("WrongConstant")
+            @SuppressLint({"WrongConstant", "SdCardPath", "DefaultLocale"})
             public void onPictureTaken(byte[] data, Camera camera) {
                 FileOutputStream outStream = null;
                 try {
-                    outStream = new FileOutputStream(String.format("/sdcard/%d.jpg", System.currentTimeMillis()));
+                    outStream = new FileOutputStream(String.format("/sdcard/Muztalk%d.jpg", System.currentTimeMillis()));
                     outStream.write(data);
                     outStream.close();
                     Log.d("Log", "onPictureTaken - wrote bytes: " + data.length);

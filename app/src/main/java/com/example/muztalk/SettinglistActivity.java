@@ -24,6 +24,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SettinglistActivity extends AppCompatActivity {
 
@@ -61,7 +63,6 @@ public class SettinglistActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settinglist);
         getSupportActionBar().hide();
 
-
         init();
 
         UPDATE_USERNAME.setOnClickListener(new View.OnClickListener() {
@@ -69,13 +70,11 @@ public class SettinglistActivity extends AppCompatActivity {
             public void onClick(View v) { fun_updateUsername();                                              //update_username
             }
         });
-
         LOG_OUT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { logout();                                                                 //log_out
             }
         });
-
         INVITE_FRIEND.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                                     //invite_friend
@@ -99,7 +98,6 @@ public class SettinglistActivity extends AppCompatActivity {
 
             }
         });
-
         if(sharedPreff.loadNightModeState() || AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
         {
             T_SWITCH.setChecked(true);
@@ -119,9 +117,7 @@ public class SettinglistActivity extends AppCompatActivity {
 
             });
         }
-
-
-        CHANGE_password.setOnClickListener(new View.OnClickListener() {                                                    //change_pass
+        CHANGE_password.setOnClickListener(new View.OnClickListener() {                           //////////////////////////change_pass
             @Override
             public void onClick(View v) {
                 final EditText resetpass = new EditText(v.getContext());
@@ -129,7 +125,6 @@ public class SettinglistActivity extends AppCompatActivity {
                 pass_change_dialog.setTitle("Change Password?");
                 pass_change_dialog.setMessage("Enter new password more than 6 characters.");
                 pass_change_dialog.setView(resetpass);
-
 
                 pass_change_dialog.setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
@@ -159,7 +154,6 @@ public class SettinglistActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-
         DELETE_ACC.setOnClickListener(new View.OnClickListener() {                                                //delete_acc
             @Override
             public void onClick(View v) {
@@ -184,6 +178,9 @@ public class SettinglistActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful())
                                                 {
+                                                    String userid = user.getUid();
+                                                    DatabaseReference dRef = FirebaseDatabase.getInstance().getReference("Chats").child(userid);
+                                                    dRef.removeValue();
                                                     firebaseAuth.signOut();
                                                     startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                                                     Toast.makeText(SettinglistActivity.this,"Account deleted successfully.",Toast.LENGTH_SHORT).show();
@@ -216,6 +213,7 @@ public class SettinglistActivity extends AppCompatActivity {
     }
 
     private void init() {
+
         UPDATE_USERNAME = findViewById(R.id.a_update_username);
         INVITE_FRIEND = findViewById(R.id.a_invite_friend);
         CHANGE_password=findViewById(R.id.a_change_password);
@@ -226,8 +224,8 @@ public class SettinglistActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
-    }
 
+    }/////////////
     int counter = 0;
     @Override
     public void onBackPressed()
@@ -238,25 +236,25 @@ public class SettinglistActivity extends AppCompatActivity {
             Intent intent = new Intent(this,UserprofileActivity.class);
             startActivity(intent);
         }
-    }
+    }/////////////////////
 
     public void fun_updateUsername(){
         Intent intent = new Intent(this,UpdateusernameActivity.class);
         startActivity(intent);
-    }
+    }/////////////
     public void logout()
     {
         FirebaseAuth.getInstance().signOut();
         finish();
         startActivity(new Intent(getApplicationContext(),HomeActivity.class));
 
-    }
+    }/////////////////
 
     private void restartApp() {
         Intent i = new Intent(getApplicationContext(), SettinglistActivity.class);
         startActivity(i);
         finish();
-    }
+    }/////////////////
 
 
 }

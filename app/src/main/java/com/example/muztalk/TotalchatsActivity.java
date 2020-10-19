@@ -2,10 +2,12 @@ package com.example.muztalk;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.muztalk.Fragments.ChatlistFragment;
+import com.example.muztalk.Fragments.FriendslistFragment;
+import com.example.muztalk.Fragments.UsersearchFragment;
+import com.example.muztalk.notifications.Token;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -33,12 +40,14 @@ public class TotalchatsActivity extends AppCompatActivity {
 
     CircleImageView profile_image;
     TextView username;
+    ImageView CAM;
     SharedPreff sharedPreff;
     FirebaseUser firebaseUser;
     DatabaseReference reference;
     DatabaseReference FB_user;
     FirebaseAuth firebaseAuth;
     String userid;
+    String mUID;
     private static final int REQUEST_CODE_PERMISSION = 1;
     private int backpressedTime = 0;
 
@@ -65,26 +74,45 @@ public class TotalchatsActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String get_username_FB = dataSnapshot.child("username").getValue(String.class);
                         username.setText(get_username_FB);
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
 
+        CAM = findViewById(R.id.face_camera);
+        CAM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opencamera();
+            }
+        });
+
 
         BottomNavigationView navigationView = findViewById(R.id.navigation_bar);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
-                                                                                                        //default fragment
+///////////////////////////////////////////////////////////////////////////////////////////default fragment
         ChatlistFragment chatlistFragment = new ChatlistFragment();
         FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
         ft2.replace(R.id.content,chatlistFragment,"");
         ft2.commit();
 
+        checkUserStatus();
+/////////////////////////////////////////////////////////////////////////////////////////update token
+        updateToken(FirebaseInstanceId.getInstance().getToken());
+    }
 
+    private void opencamera() {
+        Intent intent = new Intent(this,FacecameraActivity.class);
+        startActivity(intent);
+    }
+
+    private void updateToken(String token) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tokens");
+        Token mToken = new Token(token);
+        ref.child(mUID).setValue(mToken);
     }
 
     public void open_camera_story(View view)
@@ -146,9 +174,6 @@ public class TotalchatsActivity extends AppCompatActivity {
                             startActivity(room_intent);
                             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                             return true;
-
-
-
                     }
                     return false;
                 }
@@ -161,13 +186,24 @@ public class TotalchatsActivity extends AppCompatActivity {
         hashMap.put("status", status);
         reference.updateChildren(hashMap);
     }
-
+    private void checkUserStatus() {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user!=null)
+        {
+            mUID = user.getUid();
+            ///////////////////////////////////////////////////////////////////////save uid in Shared Preferences
+            SharedPreferences sp = getSharedPreferences("SP_users",MODE_PRIVATE);
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("Current_USERID",mUID);
+            editor.apply();
+        }
+    }
     @Override
     protected void onResume() {
+        checkUserStatus();
         super.onResume();
         status("Active");
     }
-
     @Override
     protected void onPause() {
         super.onPause();

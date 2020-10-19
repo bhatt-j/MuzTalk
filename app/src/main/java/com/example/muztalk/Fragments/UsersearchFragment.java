@@ -1,4 +1,4 @@
-package com.example.muztalk;
+package com.example.muztalk.Fragments;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,8 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.muztalk.adapter.AdapterUsers;
-import com.example.muztalk.model.ModelUsers;
+import com.example.muztalk.Adapters.AdapterUsers;
+import com.example.muztalk.Models.ModelUsers;
+import com.example.muztalk.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsersearchFragment extends Fragment {
+    ProgressBar PROGRESSBAR;
     RecyclerView recyclerView;
     AdapterUsers adapterUsers;
     List<ModelUsers> usersList;
@@ -40,15 +43,16 @@ public class UsersearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_usersearch, container, false);
 
         recyclerView = view.findViewById(R.id.users_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
                                                                                                         //init user list
         usersList = new ArrayList<>();
-                                                                                                        //getalluser
+        PROGRESSBAR=view.findViewById(R.id.progressBar);
+        PROGRESSBAR.setVisibility(View.GONE);                                                                                          //getalluser
         getAllUsers();
 
         SEARCH_USER = view.findViewById(R.id.search_user);
@@ -108,6 +112,7 @@ public class UsersearchFragment extends Fragment {
 
             private void getAllUsers() {
                 //get current user
+                PROGRESSBAR.setVisibility(View.VISIBLE);
                 FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
                 //get data from path
@@ -120,6 +125,7 @@ public class UsersearchFragment extends Fragment {
                             if (!modelUsers.getId().equals(fUser.getUid())) {
                                 usersList.add(modelUsers);
                             }
+                            PROGRESSBAR.setVisibility(View.GONE);
                             adapterUsers = new AdapterUsers(getActivity(), usersList);
                             recyclerView.setAdapter(adapterUsers);
                         }

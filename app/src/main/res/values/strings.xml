@@ -105,4 +105,6 @@
     <string name="delivered">Delivered</string>
     <string name="stories">Stories</string>
     <string name="profile">Profile</string>
+    <string name="last_message">Last message</string>
+    <string name="accss">Access to the camera is needed for detection.</string>
 </resources>

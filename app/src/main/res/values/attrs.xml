@@ -12,6 +12,7 @@
         <attr name= "recv_chat" format="color"/>
         <attr name= "send_chat" format="color"/>
         <attr name="online" format="color"/>
+        <attr name="offline" format="color"/>
 
 
 
