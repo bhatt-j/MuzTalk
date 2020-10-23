@@ -1,8 +1,11 @@
 package com.example.muztalk;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +30,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Locale;
+
 public class SettinglistActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
@@ -37,10 +42,10 @@ public class SettinglistActivity extends AppCompatActivity {
     final String MYPREF = "nightmodepref";
     final String KEY_ISNIGHTMODE = "isNightMode";
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    SwitchCompat NOTIFY_SWITCH , T_SWITCH;
+    SwitchCompat T_SWITCH;
     //String[] s1={"Update Username","Notifications","Theme","invite friend","Change Password","Log-out","Delete Account"};
     //int[] icons={R.drawable.user_icon1,R.drawable.notifications_icon,R.drawable.theme_icon,R.drawable.usergroup_icon,R.drawable.password,R.drawable.exit_icon,R.drawable.delete_icon};
-    Button UPDATE_USERNAME, INVITE_FRIEND,CHANGE_password,LOG_OUT,DELETE_ACC;
+    Button UPDATE_USERNAME, INVITE_FRIEND,CHANGE_password,LOG_OUT,DELETE_ACC, APP_LANG;
 
     String EM_MESSAGE = "Hey,\n" +
             "Muztalk is an entertaining app that I use to \n" +
@@ -48,7 +53,7 @@ public class SettinglistActivity extends AppCompatActivity {
             "\n" +
             "Give a try to this app.\n" +
             "Thanks.";
-    String EM_SUBJECT = "Muztalk : Android Phone";
+    String EM_SUBJECT = "Muztalk : Android Application";
 
 
     @Override
@@ -60,6 +65,7 @@ public class SettinglistActivity extends AppCompatActivity {
         }
         else setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        loadLocale();
         setContentView(R.layout.activity_settinglist);
         getSupportActionBar().hide();
 
@@ -69,12 +75,12 @@ public class SettinglistActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) { fun_updateUsername();                                              //update_username
             }
-        });
+        });                                 ////////////UPDATE USERNAME
         LOG_OUT.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { logout();                                                                 //log_out
+            public void onClick(View v) { logout();                                                                 /////////////////////////////log_out
             }
-        });
+        });                                         ///////////LOG OUT
         INVITE_FRIEND.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {                                                                     //invite_friend
@@ -97,7 +103,9 @@ public class SettinglistActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });                                   ///////////INVITE FRIEND
+
+        /////////////THEME
         if(sharedPreff.loadNightModeState() || AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
         {
             T_SWITCH.setChecked(true);
@@ -153,8 +161,8 @@ public class SettinglistActivity extends AppCompatActivity {
                 AlertDialog dialog =pass_change_dialog.create();
                 dialog.show();
             }
-        });
-        DELETE_ACC.setOnClickListener(new View.OnClickListener() {                                                //delete_acc
+        });     /////////////////////CHANGE PASSWORD
+        DELETE_ACC.setOnClickListener(new View.OnClickListener() {                      ////////////////////////// //delete_acc
             @Override
             public void onClick(View v) {
                 final EditText pass = new EditText(v.getContext());
@@ -162,8 +170,6 @@ public class SettinglistActivity extends AppCompatActivity {
                 pass_change_dialog.setTitle("Delete Account?");
                 pass_change_dialog.setMessage("Enter your password.");
                 pass_change_dialog.setView(pass);
-
-
                 pass_change_dialog.setPositiveButton("yes",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -209,7 +215,71 @@ public class SettinglistActivity extends AppCompatActivity {
             }
         });
 
+        APP_LANG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChangeLang_dialog();
+            }
+        });
+    }
 
+    private void ChangeLang_dialog() {
+        final String[] listItems = {"Française" , "हिंदी", "ગુજરાતી", "తెలుగు","English"};
+        AlertDialog.Builder mbuilder = new AlertDialog.Builder(SettinglistActivity.this);
+        mbuilder.setTitle("App Language");
+        mbuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                if(i==0)
+                {
+                    setLocale("fr");
+                    recreate();
+                }
+                else if(i==1)
+                {
+                    setLocale("hi");
+                    recreate();
+                }
+                else if(i==2)
+                {
+                    setLocale("gu");
+                    recreate();
+                }
+                else if(i==3)
+                {
+                    setLocale("te");
+                    recreate();
+                }
+                else if(i==4)
+                {
+                    setLocale("en");
+                    recreate();
+                }
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog mDialog = mbuilder.create();
+        mDialog.show();
+    }
+
+    private void setLocale(String language) {
+        Locale locale = new Locale(language);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        //save data to Sharedd Preff
+        SharedPreferences.Editor editor = getSharedPreferences("Settings",MODE_PRIVATE ).edit();
+        editor.putString("My_Lang",language);
+        editor.apply();
+    }
+
+    public void loadLocale()
+    {
+        SharedPreferences preferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
+        String lang = preferences.getString("My_Lang","");
+        setLocale(lang);
     }
 
     private void init() {
@@ -219,11 +289,10 @@ public class SettinglistActivity extends AppCompatActivity {
         CHANGE_password=findViewById(R.id.a_change_password);
         LOG_OUT=findViewById(R.id.a_log_out);
         DELETE_ACC = findViewById(R.id.a_delete_acc);
-        NOTIFY_SWITCH = findViewById(R.id.switch1);
         T_SWITCH = findViewById(R.id.switch2);
-
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+        APP_LANG = findViewById(R.id.change_lang);
 
     }/////////////
     int counter = 0;
@@ -249,13 +318,11 @@ public class SettinglistActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),HomeActivity.class));
 
     }/////////////////
-
     private void restartApp() {
         Intent i = new Intent(getApplicationContext(), SettinglistActivity.class);
         startActivity(i);
         finish();
     }/////////////////
-
 
 }
 

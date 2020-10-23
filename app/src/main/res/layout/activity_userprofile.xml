@@ -172,7 +172,7 @@
                         android:layout_width="34dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        app:srcCompat="@drawable/ic_baseline_email_24"
+                        app:srcCompat="@drawable/email_icon"
                         tools:ignore="VectorDrawableCompat"
                         android:contentDescription="@string/todo" />
 

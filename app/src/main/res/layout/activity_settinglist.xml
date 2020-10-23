@@ -49,9 +49,21 @@
         android:textStyle="bold"
         tools:ignore="RtlHardcoded" />
 
+    <Button
+        android:id="@+id/a_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginTop="10dp"
+        android:background="#00F4D19D"
+        android:textColor="?attr/textColor"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="@string/change_password"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded" />
 
-
-    <RelativeLayout android:layout_width="match_parent"
+   <!-- <RelativeLayout android:layout_width="match_parent"
     android:layout_height="47dp"
     >
         <androidx.appcompat.widget.SwitchCompat
@@ -69,7 +81,20 @@
             android:textColor="?attr/textColor"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-</RelativeLayout>
+</RelativeLayout>-->
+    <Button
+        android:id="@+id/change_lang"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginTop="10dp"
+        android:textColor="?attr/textColor"
+        android:background="#00F4D19D"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:text="@string/app_language"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        />
 
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="47dp"
@@ -103,20 +128,6 @@
         android:textSize="25sp"
         android:textStyle="bold"
          />
-
-    <Button
-        android:id="@+id/a_change_password"
-        android:layout_width="match_parent"
-        android:layout_height="37dp"
-        android:layout_marginTop="10dp"
-        android:background="#00F4D19D"
-        android:textColor="?attr/textColor"
-        android:fontFamily="sans-serif-black"
-        android:gravity="center"
-        android:text="@string/change_password"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        tools:ignore="RtlHardcoded" />
 
     <Button
         android:id="@+id/a_log_out"

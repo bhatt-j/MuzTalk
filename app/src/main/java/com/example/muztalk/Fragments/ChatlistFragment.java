@@ -64,7 +64,6 @@ public class ChatlistFragment extends Fragment {
                 }
                 loadChats();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -77,16 +76,16 @@ public class ChatlistFragment extends Fragment {
     private void loadChats() {
         PROGRESSBAR.setVisibility(View.VISIBLE);
         userList = new ArrayList<>();
+        databaseReference=FirebaseDatabase.getInstance().getReference("users");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               // userList.clear();
+               userList.clear();
                 for(DataSnapshot ds: snapshot.getChildren())
                 {
                     ModelUsers users = ds.getValue(ModelUsers.class);
                     for(ModelChatList chatList: chatListList)
                     {
-                        assert users != null;
                         if(users.getId() != null && users.getId().equals(chatList.getId()))
                         {
                             userList.add(users);

@@ -34,31 +34,39 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end"
                 android:paddingBottom="5dp">
-                <ImageButton
-                    android:id="@+id/flash"
+               <!-- <ImageView
+                    android:id="@+id/cancel_camera"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginStart="15dp"
-                    android:layout_weight="1"
-                    android:background="#00000000"
-                    app:tint="?attr/textColor"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/flash" />
+                    android:foregroundGravity="right"
+                    android:src="@drawable/ic_baseline_cancel_24"
+                    app:tint="#fff"
+                    />-->
+                <TextView
+                    android:id="@+id/exit_camera"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:foregroundGravity="right"
+                    android:paddingLeft="15dp"
+                    android:text="x"
+                    android:textSize="40sp"
+                    android:textColor="#fff"
+                    />
+
 
                 <ImageButton
                     android:id="@+id/flip_camera"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="75dp"
+                    android:layout_marginStart="320dp"
+                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="#00000000"
-                    app:tint="?attr/textColor"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/flip_camera" />
+                    app:srcCompat="@drawable/flip_camera"
+                    app:tint="#fff" />
 
             </RelativeLayout>
 
@@ -76,14 +84,25 @@
                 android:paddingBottom="5dp">
 
                 <ImageButton
+                    android:id="@+id/flash"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="35dp"
+                    app:srcCompat="@drawable/flash"
+                    app:tint="#fff" />
+
+                <ImageButton
                     android:id="@+id/capture_image"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:background="#00000000"
                     android:scaleType="fitXY"
-                    app:tint="?attr/textColor"
+                    app:tint="#fff"
                     android:src="@drawable/click_camera_icon" />
 
                 <ImageButton
@@ -92,9 +111,9 @@
                     android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="35dp"
                     android:layout_weight="1"
-                    app:tint="?attr/textColor"
+                    app:tint="#fff"
                     android:background="#00000000"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/face" />
@@ -213,14 +232,14 @@
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/fc_mask3" />
                     <ImageButton
-                        android:id="@+id/hair"
+                        android:id="@+id/mask4"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:background="@drawable/round_background"
                         android:scaleType="fitXY"
-                        app:srcCompat="@drawable/fc_hair" />
+                        app:srcCompat="@drawable/fc_mask4" />
 
                     <ImageButton
                         android:id="@+id/cat2"

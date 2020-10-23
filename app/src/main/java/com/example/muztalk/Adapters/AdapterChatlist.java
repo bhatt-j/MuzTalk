@@ -49,12 +49,14 @@ public class AdapterChatlist extends RecyclerView.Adapter<AdapterChatlist.MyHold
 
         //set data
         holder.USER_NAME.setText(username);
+
         if (last_message == null || last_message.equals("default")) {
             holder.LAST_MESSAGE.setVisibility(View.GONE);
-        } else {
+        } else{
             holder.LAST_MESSAGE.setVisibility(View.VISIBLE);
             holder.LAST_MESSAGE.setText(last_message);
         }
+
         try{
             Picasso.get().load(R.drawable.logo).placeholder(R.drawable.logo).into(holder.PROFILE_DP);
         }
@@ -67,8 +69,8 @@ public class AdapterChatlist extends RecyclerView.Adapter<AdapterChatlist.MyHold
         if(userList.get(position).getStatus().equals("Active"))
         {
             //////////////////////////////////////////////////////ONLINE
-            //Picasso.get().load(R.drawable.circle_online).into(holder.ONLINE_STATUS);
-            holder.ONLINE_STATUS.setImageResource(R.drawable.circle_online);
+            Picasso.get().load(R.drawable.circle_online).into(holder.ONLINE_STATUS);
+            //holder.ONLINE_STATUS.setImageResource(R.drawable.circle_online);
         }
         else
         {
@@ -108,8 +110,6 @@ public class AdapterChatlist extends RecyclerView.Adapter<AdapterChatlist.MyHold
             ONLINE_STATUS = itemView.findViewById(R.id.online_status);
             USER_NAME = itemView.findViewById(R.id.username_chatList);
             LAST_MESSAGE = itemView.findViewById(R.id.last_msg);
-
-
         }
     }
 }

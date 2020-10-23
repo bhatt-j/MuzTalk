@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Camera;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +36,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 import static android.view.View.GONE;
 
@@ -67,7 +70,7 @@ public class FacecameraActivity extends AppCompatActivity {
     private Camera camera;
     CameraSource.PictureCallback jpegCallback;
 
-    private static final int MASK[] = {
+    private static final int[] MASK = {
             R.id.no_filter,
             R.id.snap,
             R.id.dog,
@@ -78,13 +81,14 @@ public class FacecameraActivity extends AppCompatActivity {
             R.id.mask,
             R.id.mask2,
             R.id.mask3,
-            R.id.hair,
+            R.id.mask4,
             R.id.cat2,
             R.id.op
     };
 
-    ImageButton FACE , NO_FILTER, HAIR, OP, SNAP, GLASSES2, GLASSES3, GLASSES4, GLASSES5, MASK1, MASK2, MASK3, DOG, CAT2;
+    ImageButton FACE , NO_FILTER, MASK4, OP, SNAP, GLASSES2, GLASSES3, GLASSES4, GLASSES5, MASK1, MASK2, MASK3, DOG, CAT2;
     ImageButton FLIP_CAMERA,FLASH,CAPTURE;
+    TextView EXIT_CAMERA;
     SharedPreff sharedPreff;
     private CameraSourcePreview mPreview;
     private GraphicOverlay mGraphicOverlay;
@@ -101,7 +105,7 @@ public class FacecameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facecamera);
         init_fun();
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         mPreview = findViewById(R.id.preview);
         mGraphicOverlay = findViewById(R.id.faceOverlay);
         //mTextGraphic = new TextGraphic(mGraphicOverlay);
@@ -216,7 +220,7 @@ public class FacecameraActivity extends AppCompatActivity {
             }
         });
 
-        HAIR.setOnClickListener(new View.OnClickListener() {
+        MASK4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 findViewById(MASK[typeFace]).setBackgroundResource(R.drawable.round_background);
@@ -270,6 +274,13 @@ public class FacecameraActivity extends AppCompatActivity {
             public void onClick(View v) {
                 takeImage();
                 onPause();
+
+                CAPTURE.setVisibility(GONE);
+                FLIP_CAMERA.setVisibility(GONE);
+                FACE.setVisibility(GONE);
+                FLASH.setVisibility(GONE);
+
+
             }
         });
 
@@ -282,11 +293,19 @@ public class FacecameraActivity extends AppCompatActivity {
             requestCameraPermission();
         }
 
+        EXIT_CAMERA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FacecameraActivity.this, TotalchatsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     private void init_fun() {
         FACE = findViewById(R.id.face);
         NO_FILTER = findViewById(R.id.no_filter);
-        HAIR = findViewById(R.id.hair);
+        MASK4 = findViewById(R.id.mask4);
         OP = findViewById(R.id.op);
         SNAP = findViewById(R.id.snap);
         GLASSES2 = findViewById(R.id.glasses2);
@@ -301,6 +320,7 @@ public class FacecameraActivity extends AppCompatActivity {
         FLIP_CAMERA = findViewById(R.id.flip_camera);
         FLASH = findViewById(R.id.flash);
         CAPTURE = findViewById(R.id.capture_image);
+        EXIT_CAMERA = findViewById(R.id.exit_camera);
     }
 
     private void createCameraSource() {
@@ -710,9 +730,6 @@ public class FacecameraActivity extends AppCompatActivity {
         public void onDone() {
             mOverlay.remove(mFaceGraphic);
         }
-    } /**
-     * Factory for creating a face tracker to be associated with a new face.  The multiprocessor
-     * uses this factory to create face trackers as needed -- one for each individual.
-     */
+    }
 
 }

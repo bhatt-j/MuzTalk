@@ -27,7 +27,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
     public AdapterUsers(Context context, List<ModelUsers> usersList) {
         this.context = context;
         this.usersList = usersList;
-    }
+    }       /////////////////// CONSTRUCTOR
 
     @NonNull
     @Override
@@ -78,14 +78,14 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder>{
     static class MyHolder extends RecyclerView.ViewHolder{
         static ImageView dp;
         static TextView name;
-        static TextView typing;
+       // static TextView typing;
 
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             dp = itemView.findViewById(R.id.user_list_dp);
             name = itemView.findViewById(R.id.username_list);
-            typing = itemView.findViewById(R.id.typing);
+            //typing = itemView.findViewById(R.id.typing);
         }
     }
 }

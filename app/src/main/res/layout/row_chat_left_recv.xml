@@ -3,44 +3,54 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:id="@+id/messageLayout"
-    >
-<LinearLayout
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:layout_marginEnd="30dp">
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_height="50dp"
-        android:layout_width="50dp"
-        app:c_border_color="@null"
-        android:src="@drawable/logo"
-        android:id="@+id/recv_profile_pic"/>
-    <TextView
+    android:id="@+id/messageLayout">
+    <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textSize="19sp"
-        android:textColor="?attr/textColor"
-        android:background="@drawable/bg_receiver"
-        android:text="@string/recv_message"
-        android:padding="15dp"
-        android:id="@+id/message"/>
-</LinearLayout>
+        android:layout_marginEnd="30dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_height="45dp"
+            android:layout_width="45dp"
+            app:c_border_color="@null"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/logo"
+            android:id="@+id/recv_profile_pic"/>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="19sp"
+            android:textColor="?attr/textColor"
+            android:background="@drawable/bg_receiver"
+            android:text="@string/recv_message"
+            android:padding="15dp"
+            android:id="@+id/message"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp">
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:textColor="?attr/textColor"
-        android:textSize="12sp"
-        android:id="@+id/timestamp"
-        android:text="@string/dd_mm_yyyy_min_sec_pm"
-        android:paddingStart="2dp"
-    />
-
-
-</LinearLayout>
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="?attr/textColor"
+            android:textSize="12sp"
+            android:id="@+id/delivr_status"
+            android:text="@string/dd_mm_yyyy_min_sec_pm"
+            android:paddingStart="2dp"
+        />
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="?attr/textColor"
+            android:textSize="12sp"
+            android:id="@+id/timestamp"
+            android:layout_marginStart="10dp"
+            android:text="@string/delivered"
+            android:paddingStart="2dp"
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry" />
+    </LinearLayout>
 </LinearLayout>

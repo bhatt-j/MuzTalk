@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -44,6 +46,7 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -57,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
     SharedPreff sharedPreff;
     CircleImageView PROFILE_IMAGE;
     TextView username,STATUS;
-    ImageButton SEND_BUTTON;
+    ImageButton SEND_BUTTON,SPEECH_TO_TEXT;
     EditText MSG;
     Toolbar TOOLBAR;
     //firebase
@@ -111,7 +114,7 @@ public class ChatActivity extends AppCompatActivity {
         userDBRef = firebaseDatabase.getReference("users");
 
         Query userQuery = userDBRef.orderByChild("id").equalTo(hisUID);
-            //////////////////////////////////////////////////////////////////////////////////////////////////USERIMAGE AND USERNAME
+            //////////////////////////////////////////////////////////////////////////////////////USERIMAGE AND USERNAME
         userQuery.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -186,9 +189,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
             ///////////////////////////////////////////////////////////////////////////////////////////////////SEND MESSAGE
-
-
-        SEND_BUTTON.setOnClickListener(new View.OnClickListener() {
+            SEND_BUTTON.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 notify = true;
@@ -249,9 +250,18 @@ public class ChatActivity extends AppCompatActivity {
                 MSG.setText("");
             }
         });
-        readMessages(publicKey);
-        SeenMessages();
+            readMessages(publicKey);
+            SeenMessages();
+            ///////////////////////////////////////////////////////////////////////////////////////////////////SPEECH_TO_TEXT
+            SPEECH_TO_TEXT.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    GetSpeech_fun();
+                }
+            });
     }
+
+
     //****************************************************************************************************************//
     private void SeenMessages() {
         userRefForSeen = FirebaseDatabase.getInstance().getReference("Chats");
@@ -327,7 +337,7 @@ public class ChatActivity extends AppCompatActivity {
                 ModelUsers user = snapshot.getValue(ModelUsers.class);
                 if(notify)
                 {
-                    sendNotification(hisUID, user.getUsername(), msg);
+                    //sendNotification(hisUID, user.getUsername(), msg);
                 }
                 notify = false;
             }
@@ -414,6 +424,8 @@ public class ChatActivity extends AppCompatActivity {
         MSG = findViewById(R.id.message);
         SEND_BUTTON = findViewById(R.id.btn_send);
         recyclerView = findViewById(R.id.chat_recycler);
+        SPEECH_TO_TEXT = findViewById(R.id.speech_to_text);
+
     }//////
     private void checkUserStatus() {
         FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -467,6 +479,35 @@ public class ChatActivity extends AppCompatActivity {
         fun_typing("None");
     }//////
 
+    private void GetSpeech_fun() {
+        Intent speech_intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        speech_intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        speech_intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        if(speech_intent.resolveActivity(getPackageManager()) != null)
+        {
+            startActivityForResult(speech_intent,10);
+        }
+        else
+        {
+            Toast.makeText(this,"Device do not support Speech Input",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode)
+        {
+            case 10:
+                if(resultCode == RESULT_OK && data != null)
+                {
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    assert result != null;
+                    SendMessage(result.get(0));
+                }
+        }
+    }
 }
 
 

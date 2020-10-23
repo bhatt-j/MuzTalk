@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FacecameraActivity"></activity>
+        <activity android:name=".FacecameraActivity" />
         <activity android:name=".ChatActivity" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld

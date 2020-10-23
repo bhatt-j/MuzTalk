@@ -116,7 +116,7 @@ public class PlayerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 sb.setMax(mp.getDuration());
                 if(mp.isPlaying()){
-                    pause.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+                    pause.setBackgroundResource(R.drawable.play_arrow_icon);
                     mp.pause();
 
                 }

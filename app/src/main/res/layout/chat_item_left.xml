@@ -35,7 +35,7 @@
         android:id="@+id/message_image"
         android:background="?attr/backgroundColor"
         android:adjustViewBounds="true"
-        android:src="@drawable/ic_baseline_photo_24"
+        android:src="@drawable/photo_icon"
         />
     <TextView
         android:layout_width="wrap_content"

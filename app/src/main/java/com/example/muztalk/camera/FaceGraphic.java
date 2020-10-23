@@ -39,19 +39,19 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
     private static final float BOX_STROKE_WIDTH = 5.0f;
 
     private static final int[] MASK = {
-            R.id.no_filter,
-            R.id.snap,
-            R.id.dog,
-            R.id.glasses2,
-            R.id.glasses3,
-            R.id.glasses4,
-            R.id.glasses5,
-            R.id.mask,
-            R.id.mask2,
-            R.id.mask3,
-            R.id.hair,
-            R.id.cat2,
-            R.id.op
+            R.drawable.fc_transparent,
+            R.drawable.fc_snap,
+            R.drawable.fc_dog,
+            R.drawable.fc_glasses2,
+            R.drawable.fc_glasses3,
+            R.drawable.fc_glasses4,
+            R.drawable.fc_glasses5,
+            R.drawable.fc_mask,
+            R.drawable.fc_mask2,
+            R.drawable.fc_mask3,
+            R.drawable.fc_mask4,
+            R.drawable.fc_cat2,
+            R.drawable.fc_op
     };
 
     /*
@@ -94,7 +94,7 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
         mBoxPaint.setStrokeWidth(BOX_STROKE_WIDTH);
         */
         Log.d("name: ", String.valueOf(MASK[c]));
-        bitmap = BitmapFactory.decodeResource(getOverlay().getContext().getResources(),R.drawable.fc_glasses3);
+        bitmap = BitmapFactory.decodeResource(getOverlay().getContext().getResources(),MASK[c]);
         op = bitmap;
     }
     public void setId(int id) {
@@ -106,8 +106,8 @@ public class FaceGraphic extends GraphicOverlay.Graphic {
      */
     public void updateFace(Face face, int c) {
         mFace = face;
-       // bitmap = BitmapFactory.decodeResource(getOverlay().getContext().getResources(), MASK[c]);
-        //op = bitmap;
+        bitmap = BitmapFactory.decodeResource(getOverlay().getContext().getResources(), MASK[c]);
+        op = bitmap;
         op = Bitmap.createScaledBitmap(op, (int) scaleX(face.getWidth()),
                 (int) scaleY(((bitmap.getHeight() * face.getWidth()) / bitmap.getWidth())), false);
         postInvalidate();

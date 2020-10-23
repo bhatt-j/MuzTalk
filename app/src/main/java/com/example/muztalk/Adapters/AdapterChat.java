@@ -26,7 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.security.Key;
 import java.util.Calendar;
@@ -48,8 +47,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         this.chatList = chatList;
         this.imageUrl = imageUrl;
         this.publicKey = publicKey;
-    }
-
+    }           ////////////////////////CONSTRUCTOR
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,8 +61,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
             View view = LayoutInflater.from(context).inflate(R.layout.row_chat_left_recv,parent,false);
             return new MyHolder(view);
         }
-    }
-
+    }                             ///////////////////////CHAT SEPARATION TO LEFT RIGHT
     @SuppressLint({"SetTextI18n", "WrongConstant"})
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
@@ -91,10 +88,8 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         } catch (Exception e) {
             Log.e("Crypto", "RSA decryption error");
         }*/
-//        Log.d("Decoded string: ", new String(decodedBytes));
-  //      String DECRYPTED_MSG = new String(decodedBytes);
-
-
+       //        Log.d("Decoded string: ", new String(decodedBytes));
+        //      String DECRYPTED_MSG = new String(decodedBytes);
 
 
         /*byte[] decode_msg = null;
@@ -109,7 +104,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         } catch (Exception e) {
             Log.e("Crypto", "RSA decryption error");
         }
-//        Log.d("Decoded string: ", new String(DECODEDBYTES));
+        //        Log.d("Decoded string: ", new String(DECODEDBYTES));
         String DECRYPTED_MSG = new String(DECODEDBYTES);*/
 
         /////////////////////////////////////////////////////////////////////////////////////////////setdata
@@ -117,15 +112,14 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         holder.TIME.setVisibility(visiblity);
         holder.TIME.setText(dateTime);
         try{
-            Picasso.get().load(imageUrl).into(holder.RECV_PROFILE_PIC);
+            //     Picasso.get().load(imageUrl).into(holder.RECV_PROFILE_PIC);
         }
         catch (Exception e)
         {
-            //
+
+        //    Picasso.get().load(R.mipmap.ic_launcher).into(holder.RECV_PROFILE_PIC);
         }
-
         /////////////////////////////////////////////////////////////////////click to show delete dialog box
-
         holder.MESSAGELAYOUT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,11 +147,11 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         {
             if(chatList.get(position).isIsseen())
             {
-                holder.SEEN_STATUS.setVisibility(visiblity);
+                holder.SEEN_STATUS.setVisibility(View.VISIBLE);
                 holder.SEEN_STATUS.setText("Seen");
             }
             else{
-                holder.SEEN_STATUS.setVisibility(visiblity);
+                holder.SEEN_STATUS.setVisibility(View.VISIBLE);
                 holder.SEEN_STATUS.setText("Delivered");
             }
         }
@@ -165,7 +159,8 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder>{
         {
             holder.SEEN_STATUS.setVisibility(View.GONE);
         }
-    }///////
+    }///////////////////////////////////////////
+
     private void DeleteMessage(int position) {
         //compare timestamp of selected and stored message and delete
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

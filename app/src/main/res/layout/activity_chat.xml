@@ -45,6 +45,7 @@
                 android:layout_marginStart="25dp" />
 
         </LinearLayout>
+
         <ImageView
             android:id="@+id/his_proile"
             android:layout_width="35dp"
@@ -53,6 +54,15 @@
             android:layout_weight="1"
             android:layout_marginStart="10dp"
             app:srcCompat="@drawable/info_icon" />
+        <ImageButton
+            android:id="@+id/camera_in_chat"
+            android:background="@null"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end"
+            android:layout_marginStart="10dp"
+            android:onClick="openCamera"
+            android:src="@drawable/photo_camera_icon"/>
         <ImageView
             android:id="@+id/voice_call"
             android:layout_width="35dp"
@@ -111,15 +121,14 @@
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:tint="?attr/textColor"
-            android:src="@drawable/ic_baseline_photo_24"/>
+            android:src="@drawable/photo_icon"/>
         <ImageButton
-            android:id="@+id/camera_in_chat"
+            android:id="@+id/speech_to_text"
             android:background="?attr/backgroundColor"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:tint="?attr/textColor"
-            android:onClick="openCamera"
-            android:src="@drawable/photo_camera_icon"/>
+            android:src="@drawable/mic_icon"/>
     </LinearLayout>
 
 </RelativeLayout>

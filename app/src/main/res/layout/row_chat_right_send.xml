@@ -27,7 +27,7 @@
             android:padding="10dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_photo_24"
+            android:src="@drawable/photo_icon"
             android:background="@drawable/bg_sender"
             />-->
             
